@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S4Labour Payroll — Organisation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ══ ICON RAIL ══ -->
+<div class="icon-rail" id="icon-rail">
+  <div class="rail-logo" onclick="toggleDrawer()" title="Open menu"><div class="logo-icon">S4</div></div>
+  <div class="rail-items" id="rail-items-org">
+    <div class="rail-item active" id="ri-org-dashboard" onclick="railNav('org-dashboard','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-width="2"/></svg>
+      <div class="rail-tooltip">Dashboard</div>
+    </div>
+    <div class="rail-item" id="ri-payroll-runs" onclick="railNav('payroll-runs','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><path d="M12 7v5l3 3" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rail-badge gold">1</div><div class="rail-tooltip">Payroll runs</div>
+    </div>
+    <div class="rail-item" id="ri-hours" onclick="railNav('hours','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4H4a1 1 0 00-1 1v14a1 1 0 001 1h16a1 1 0 001-1v-7" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z" stroke-width="2"/></svg>
+      <div class="rail-tooltip">Hours &amp; amendments</div>
+    </div>
+    <div class="rail-divider"></div>
+    <div class="rail-item" id="ri-employees" onclick="railNav('employees','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-width="2"/></svg>
+      <div class="rail-tooltip">Employees</div>
+    </div>
+    <div class="rail-item" id="ri-onboarding" onclick="railNav('onboarding','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke-width="2"/><line x1="19" y1="8" x2="19" y2="14" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="11" x2="16" y2="11" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rail-tooltip">Onboarding</div>
+    </div>
+    <div class="rail-item" id="ri-life-events" onclick="railNav('life-events','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke-width="2"/></svg>
+      <div class="rail-tooltip">Life events</div>
+    </div>
+    <div class="rail-divider"></div>
+    <div class="rail-item" id="ri-payslips" onclick="railNav('payslips','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke-width="2"/></svg>
+      <div class="rail-tooltip">Payslips &amp; P60s</div>
+    </div>
+    <div class="rail-item" id="ri-pay-elements" onclick="railNav('pay-elements','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" stroke-width="2" stroke-linecap="round"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rail-tooltip">Pay elements</div>
+    </div>
+    <div class="rail-item" id="ri-reports" onclick="railNav('reports','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rail-tooltip">Reports</div>
+    </div>
+    <div class="rail-item" id="ri-org-settings" onclick="railNav('org-settings','org')">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke-width="2"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="rail-tooltip">Org settings</div>
+    </div>
+    <div class="rail-item" id="ri-back-bureau" onclick="goToBureau()" style="margin-top:4px">
+      <svg class="rail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="rail-tooltip">Back to bureau</div>
+    </div>
+  </div>
+  <div class="rail-bottom">
+    <div class="rail-avatar" id="rail-avatar" onclick="toggleDrawer()">DW</div>
+  </div>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeDrawer()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark"><div class="logo-icon">S4</div><div><div class="logo-text">Payroll</div><div class="logo-sub" id="sidebar-mode-label">Organisation</div></div></div>
+    <button class="sidebar-close-btn" onclick="closeDrawer()">x</button>
+  </div>
+  <div id="nav-org">
+    <div class="nav-group">
+      <div class="nav-group-label">Organisation</div>
+      <div class="nav-item active" onclick="nav('org-dashboard',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-width="2"/></svg>Dashboard
+      </div>
+      <div class="nav-item" onclick="nav('payroll-runs',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><path d="M12 7v5l3 3" stroke-width="2" stroke-linecap="round"/></svg>Payroll runs
+      </div>
+      <div class="nav-item" onclick="nav('hours',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4H4a1 1 0 00-1 1v14a1 1 0 001 1h16a1 1 0 001-1v-7" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z" stroke-width="2"/></svg>Hours &amp; amendments
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">People</div>
+      <div class="nav-item" onclick="nav('employees',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-width="2"/></svg>Employees
+      </div>
+      <div class="nav-item" onclick="nav('onboarding',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke-width="2"/><line x1="19" y1="8" x2="19" y2="14" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="11" x2="16" y2="11" stroke-width="2" stroke-linecap="round"/></svg>Onboarding
+      </div>
+      <div class="nav-item" onclick="nav('life-events',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke-width="2"/></svg>Life events
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Finance</div>
+      <div class="nav-item" onclick="nav('payslips',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke-width="2"/></svg>Payslips &amp; P60s
+      </div>
+      <div class="nav-item" onclick="nav('pay-elements',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" stroke-width="2" stroke-linecap="round"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke-width="2" stroke-linecap="round"/></svg>Pay elements
+      </div>
+      <div class="nav-item" onclick="nav('reports',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke-width="2" stroke-linecap="round"/></svg>Reports
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Setup</div>
+      <div class="nav-item" onclick="nav('org-settings',this,'org');closeDrawer()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke-width="2"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke-width="2" stroke-linecap="round"/></svg>Org settings
+      </div>
+    </div>
+    <div style="padding:8px 10px;border-top:1px solid rgba(255,255,255,0.1);margin-top:4px">
+      <div class="btn btn-sm" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);justify-content:center;width:100%" onclick="goToBureau();closeDrawer()">Back to Bureau</div>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="user-pill">
+      <div class="user-avatar" id="user-avatar-sb">DW</div>
+      <div><div class="user-name" id="user-name-sb">Donna Wright</div><div class="user-role" id="user-role-sb">Org Admin</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar" onclick="closeDrawer()">
+    <div class="topbar-left">
+      <a href="../bureau/index.html" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:var(--text3);font-size:12px;font-weight:500;padding:4px 8px;border-radius:var(--radius);border:1px solid var(--border);margin-right:10px;transition:all 0.12s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">
+        <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2.5" stroke-linecap="round"/></svg>
+        Bureau
+      </a>
+      <div class="breadcrumb" id="breadcrumb">
+        <span class="crumb active" id="crumb-current">Dashboard</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="role-switcher">
+        <div class="role-btn" onclick="switchRole('super',this)">Super Admin</div>
+        <div class="role-btn" onclick="switchRole('bureau',this)">Bureau</div>
+        <div class="role-btn active" onclick="switchRole('org',this)">Org Admin</div>
+        <div class="role-btn" onclick="switchRole('processor',this)">Processor</div>
+      </div>
+      <div class="topbar-divider"></div>
+      <button class="btn btn-sm" onclick="showModal('modal-notifications')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke-width="2"/></svg>
+        <span style="background:var(--danger);color:#fff;font-size:10px;padding:1px 5px;border-radius:99px;font-weight:700">2</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="content" onclick="closeDrawer()">
+    <div class="screen visible" id="screen-org-dashboard" >
+      <div class="page-header">
+        <div>
+          <div class="page-title" id="org-dash-title">The Coffee Co. — Dashboard</div>
+          <div class="page-sub" id="org-dash-sub">120/AB12345 · Weekly + Monthly · RTI live</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-sm" onclick="nav('payroll-runs',null,'org')">View runs</button>
+          <button class="btn btn-primary" onclick="showModal('modal-new-run')">+ New payroll run</button>
+        </div>
+      </div>
+      <div class="metrics g4">
+        <div class="metric m-green"><div class="metric-label">Active employees</div><div class="metric-value">84</div><div class="metric-sub">3 on statutory leave</div></div>
+        <div class="metric m-gold"><div class="metric-label">Last gross</div><div class="metric-value">£36,210</div><div class="metric-sub metric-up">↑ 0.6% vs prev</div></div>
+        <div class="metric m-red"><div class="metric-label">Next run due</div><div class="metric-value">4 Apr</div><div class="metric-sub">Weekly — W14 · BACS 1 Apr</div></div>
+        <div class="metric"><div class="metric-label">Pending actions</div><div class="metric-value">3</div><div class="metric-sub">1 approval · 2 onboarding</div></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Recent pay runs</div><button class="btn btn-sm" onclick="nav('payroll-runs',null,'org')">View all</button></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Period</th><th>Employees</th><th>Gross</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>W13 Mar 2026</td><td>84</td><td class="td-num">£36,210</td><td><span class="badge badge-warning">Pending approval</span></td><td><button class="btn btn-xs btn-primary" onclick="nav('payroll-runs',null,'org')">Review</button></td></tr>
+              <tr><td>Mar 2026 Monthly</td><td>12</td><td class="td-num">£68,400</td><td><span class="badge badge-success">Approved</span></td><td><button class="btn btn-xs">View</button></td></tr>
+              <tr><td>W12 Mar 2026</td><td>84</td><td class="td-num">£35,990</td><td><span class="badge badge-success">Approved</span></td><td><button class="btn btn-xs">View</button></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Quick actions</div></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn w-full" style="justify-content:flex-start;gap:10px" onclick="nav('onboarding',null,'org')"><span>👤</span> Employee onboarding — 2 pending</button>
+            <button class="btn w-full" style="justify-content:flex-start;gap:10px" onclick="nav('hours',null,'org')"><span>📋</span> Enter hours for W14</button>
+            <button class="btn w-full" style="justify-content:flex-start;gap:10px" onclick="nav('life-events',null,'org')"><span>🤱</span> Life events — 3 active</button>
+            <button class="btn w-full" style="justify-content:flex-start;gap:10px" onclick="nav('reports',null,'org')"><span>📊</span> Download P32 / reports</button>
+          </div>
+        </div>
+      </div>
+      <div class="api-banner">
+        <span class="dot dot-blue" style="background:var(--teal)"></span>
+        <strong>API sync active</strong> — Organisation, sites and employee data pulled from S4Labour integration. FPS submissions via HMRC RTI. DPS polling: before every run. Last sync: today 08:14.
+      </div>
+    </div>
+
+    <!-- ═══ PAYROLL RUNS ═══ -->
+    <div class="screen" id="screen-payroll-runs">
+      <div class="page-header">
+        <div><div class="page-title">Payroll runs</div><div class="page-sub" id="pr-sub">The Coffee Co. · All frequencies</div></div>
+        <div class="page-actions">
+          <button class="btn btn-sm" onclick="showModal('modal-api-feed-status')">
+            <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--success);margin-right:3px"></span>
+            API feed · last sync 08:14
+          </button>
+          <button class="btn btn-sm" onclick="showModal('modal-new-run-manual')">Manual run</button>
+          <button class="btn btn-primary" onclick="showModal('modal-new-run-api')">⚡ API run</button>
+        </div>
+      </div>
+
+      <!-- Path explainer -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+        <div style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;background:var(--surface);display:flex;gap:12px;align-items:flex-start">
+          <div style="width:36px;height:36px;border-radius:8px;background:var(--teal-bg);border:1px solid #8dd9e8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚡</div>
+          <div>
+            <div class="font-600 text-sm">Automatic API feed</div>
+            <div class="text-xs text-hint" style="margin-top:2px">Hours, pay rates and employee data pulled automatically from S4Labour. Run opens and calculates with a single click. Ideal for orgs using S4Labour rota/scheduling.</div>
+            <div style="display:flex;gap:6px;margin-top:8px">
+              <span class="badge badge-info">S4Labour integration</span>
+              <span class="badge badge-success">DPS auto-applied</span>
+            </div>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;background:var(--surface);display:flex;gap:12px;align-items:flex-start">
+          <div style="width:36px;height:36px;border-radius:8px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">✏️</div>
+          <div>
+            <div class="font-600 text-sm">Manual creation</div>
+            <div class="text-xs text-hint" style="margin-top:2px">Hours entered manually or bulk-imported via CSV. Suitable for orgs without S4Labour integration or where hours need manual verification before calculation.</div>
+            <div style="display:flex;gap:6px;margin-top:8px">
+              <span class="badge badge-neutral">Manual hours entry</span>
+              <span class="badge badge-neutral">CSV bulk import</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Run cards -->
+      <div class="run-card" onclick="showModal('modal-run-detail')" style="border-left:4px solid var(--warning)">
+        <div class="run-card-header">
+          <div class="flex-center gap-12">
+            <div class="run-period">W13 — Mar 2026</div>
+            <span class="badge badge-warning">Pending approval</span>
+            <span class="tag">Weekly</span>
+            <span class="badge badge-neutral" style="font-size:10px">✏️ Manual run</span>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-xs" onclick="event.stopPropagation();showModal('modal-run-amend')">Amend</button>
+            <button class="btn btn-xs btn-primary" onclick="event.stopPropagation();showModal('modal-run-approve')">Approve run</button>
+          </div>
+        </div>
+        <div class="pipeline" style="margin-bottom:14px">
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">Hours entered</div></div>
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">Calculation</div></div>
+          <div class="pipe-step active"><div class="pipe-dot">3</div><div class="pipe-label">Review &amp; approve</div></div>
+          <div class="pipe-step pending"><div class="pipe-dot">4</div><div class="pipe-label">Submit HMRC</div></div>
+          <div class="pipe-step pending"><div class="pipe-dot">5</div><div class="pipe-label">Reports</div></div>
+          <div class="pipe-step pending"><div class="pipe-dot">6</div><div class="pipe-label">BACS</div></div>
+        </div>
+        <div class="run-meta" id="run-card-metrics">
+          <div class="run-meta-item"><div class="label">Employees</div><div class="value"><span data-run="count">—</span></div></div>
+          <div class="run-meta-item"><div class="label">Gross pay</div><div class="value"><span data-run="gross">—</span></div></div>
+          <div class="run-meta-item"><div class="label">PAYE</div><div class="value"><span data-run="paye">—</span></div></div>
+          <div class="run-meta-item"><div class="label">NI (EE+ER)</div><div class="value"><span data-run="ni">—</span></div></div>
+          <div class="run-meta-item"><div class="label">Net pay</div><div class="value"><span data-run="net">—</span></div></div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text3)">Pay date: 4 Apr 2026 · BACS deadline: 1 Apr 2026 · Cut-off: 31 Mar 2026 · Processed by: J. Ashworth</div>
+      </div>
+
+      <div class="run-card" style="border-left:4px solid var(--success)">
+        <div class="run-card-header">
+          <div class="flex-center gap-12">
+            <div class="run-period">Mar 2026 — Monthly</div>
+            <span class="badge badge-success">Approved &amp; submitted</span>
+            <span class="tag">Monthly</span>
+            <span class="badge badge-teal" style="background:var(--teal-bg);color:var(--teal-text);font-size:10px">⚡ API run</span>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-xs btn-primary" onclick="showModal('modal-fps-submit')">Submit to HMRC →</button>
+            <button class="btn btn-xs" onclick="nav('payslips',null,'org')">Payslips</button>
+            <button class="btn btn-xs" onclick="nav('reports',null,'org')">Reports &amp; BACS</button>
+          </div>
+        </div>
+        <div class="pipeline" style="margin-bottom:14px">
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">API pull</div></div>
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">Calculation</div></div>
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">Approved</div></div>
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">HMRC FPS</div></div>
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">Reports</div></div>
+          <div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">BACS sent</div></div>
+        </div>
+        <div class="run-meta">
+          <div class="run-meta-item"><div class="label">Employees</div><div class="value">12</div></div>
+          <div class="run-meta-item"><div class="label">Gross pay</div><div class="value">£68,400</div></div>
+          <div class="run-meta-item"><div class="label">PAYE</div><div class="value">£10,944</div></div>
+          <div class="run-meta-item"><div class="label">NI (EE+ER)</div><div class="value">£11,628</div></div>
+          <div class="run-meta-item"><div class="label">Net pay</div><div class="value">£52,840</div></div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text3)">Pay date: 31 Mar 2026 · FPS accepted 28 Mar · BACS file sent 28 Mar · Approved by: M. Chen</div>
+      </div>
+
+      <div class="run-card" style="border-style:dashed;cursor:default;background:var(--surface2);border-left:4px dashed var(--border2)">
+        <div class="run-card-header">
+          <div class="flex-center gap-12">
+            <div class="run-period">W14 — Apr 2026</div>
+            <span class="badge badge-neutral">Not started</span>
+            <span class="tag">Weekly</span>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-xs" onclick="showModal('modal-new-run-api')">⚡ Start API run</button>
+            <button class="btn btn-xs" onclick="showModal('modal-new-run-manual')">✏️ Start manual run</button>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text3);padding-top:4px">Pay date: 11 Apr 2026 · BACS deadline: 8 Apr 2026 · Hours entry opens: 7 Apr 2026</div>
+      </div>
+    </div>
+
+    <!-- ═══ HOURS & AMENDMENTS ═══ -->
+    <div class="screen" id="screen-hours">
+      <div class="page-header">
+        <div><div class="page-title">Hours &amp; amendments</div><div class="page-sub">Manual entry · period corrections · bulk import</div></div>
+        <div class="page-actions">
+          <button class="btn btn-sm" onclick="showModal('modal-bulk-hours')">Bulk import CSV</button>
+          <button class="btn btn-primary" onclick="showModal('modal-add-hours')">+ Add / amend</button>
+        </div>
+      </div>
+      <div class="tabs" id="hours-tabs">
+        <div class="tab active" onclick="hoursTab('current',this)">Current run — W14</div>
+        <div class="tab" onclick="hoursTab('backdated',this)">Backdated <span class="nav-badge blue" style="margin-left:4px">1</span></div>
+        <div class="tab" onclick="hoursTab('future',this)">Future / scheduled <span class="nav-badge blue" style="margin-left:4px">1</span></div>
+      </div>
+
+      <div id="hours-tab-current">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">W14 — 31 Mar to 6 Apr 2026</div><div class="card-sub">84 employees · Cut-off: 31 Mar 2026 · BACS deadline: 8 Apr 2026</div></div>
+            <div class="card-actions">
+              <select style="padding:5px 10px;font-size:12px;border:1px solid var(--border2);border-radius:var(--radius);font-family:'DM Sans',sans-serif">
+                <option>All locations</option><option>Birmingham HQ</option><option>Coventry Branch</option>
+              </select>
+              <select style="padding:5px 10px;font-size:12px;border:1px solid var(--border2);border-radius:var(--radius);font-family:'DM Sans',sans-serif">
+                <option>W14 — 31 Mar–6 Apr</option><option>W13 — 24–30 Mar</option><option>W12 — 17–23 Mar</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Employee</th><th>Location</th><th>Department</th><th>Contracted hrs</th><th>Entered hrs</th><th>Diff</th><th>Note</th><th></th></tr></thead>
+            <tbody id="hours-tbody"></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <div id="hours-tab-backdated" style="display:none">
+        <div class="alert alert-warning"><div class="alert-icon">⚠</div><div><span class="alert-title">Backdated amendments trigger recalculation.</span> A change to a closed period generates an in-year correction. The affected run will be re-submitted to HMRC automatically.</div></div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Backdated amendments</div><div class="card-sub">Changes to closed periods · all audit-logged</div></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Employee</th><th>Original period</th><th>Type</th><th>Old value</th><th>New value</th><th>Amended by</th><th>Amended on</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><div class="font-600">Priya Sharma</div><div class="text-xs text-hint">Coventry Branch</div></td><td>W12 Mar 2026</td><td>Hours correction</td><td class="td-num">35.0</td><td class="td-num">37.5</td><td class="td-muted">J. Ashworth</td><td class="td-muted text-sm">29 Mar 2026</td><td><span class="badge badge-success">Applied</span></td></tr>
+            </tbody>
+          </table></div>
+          <div style="margin-top:12px"><button class="btn btn-sm btn-primary" onclick="showModal('modal-add-hours')">+ New backdated amendment</button></div>
+        </div>
+      </div>
+
+      <div id="hours-tab-future" style="display:none">
+        <div class="alert alert-info"><div class="alert-icon">ℹ</div><div><span class="alert-title">Staged amendments.</span> Applied automatically when the target period opens. Useful for planned returns, confirmed leave dates, and pre-agreed rate changes.</div></div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Future / scheduled amendments</div><div class="card-sub">Applied automatically on the relevant pay period</div></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Employee</th><th>Target period</th><th>Type</th><th>Value</th><th>Reason</th><th>Created by</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><div class="font-600">Daniel Park</div><div class="text-xs text-hint">Coventry Branch</div></td><td>W15 Apr 2026</td><td>Return from SPP</td><td class="td-num">37.5 hrs</td><td class="text-sm td-muted">SPP ends 14 Apr</td><td class="td-muted">J. Ashworth</td><td><span class="badge badge-info">Scheduled</span></td><td><button class="btn btn-xs btn-danger">Cancel</button></td></tr>
+            </tbody>
+          </table></div>
+          <div style="margin-top:12px"><button class="btn btn-sm btn-primary" onclick="showModal('modal-add-hours')">+ Schedule future amendment</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ EMPLOYEES ═══ -->    <!-- ═══ EMPLOYEES ═══ -->
+    <div class="screen" id="screen-employees">
+      <div class="page-header">
+        <div><div class="page-title">Employees</div><div class="page-sub">84 active · 3 on leave · 2 pending onboarding</div></div>
+        <div class="page-actions">
+          <input type="text" placeholder="Search name or NI..." style="padding:7px 12px;font-size:13px;border:1px solid var(--border2);border-radius:var(--radius);font-family:'DM Sans',sans-serif;width:240px">
+          <button class="btn btn-primary" onclick="nav('onboarding',null,'org')">+ Add employee</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-wrap"><table>
+          <thead><tr><th>Employee</th><th>Department</th><th>Pay type</th><th>Rate</th><th>Tax code</th><th>NI cat</th><th>Status</th><th></th></tr></thead>
+          <tbody id="employees-tbody"></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- ═══ EMPLOYEE PROFILE ═══ -->
+    <div class="screen" id="screen-employee-profile">
+      <div class="page-header">
+        <div class="flex-center gap-12">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--accent)">EW</div>
+          <div>
+            <div class="page-title">Emma Walsh</div>
+            <div class="page-sub">Front of house · Site A · <span class="mono" style="font-size:11px">AB123400A</span></div>
+          </div>
+        </div>
+        <div class="page-actions">
+          <span class="badge badge-success" style="padding:5px 12px">Active</span>
+          <button class="btn btn-sm" onclick="showModal('modal-life-event')">+ Life event</button>
+          <button class="btn btn-primary btn-sm" onclick="showModal('modal-add-element')">+ Pay element</button>
+        </div>
+      </div>
+      <div class="tabs" id="emp-tabs">
+        <div class="tab active" onclick="empTab('personal',this)">Personal</div>
+        <div class="tab" onclick="empTab('ytd',this)">YTD &amp; pay history</div>
+        <div class="tab" onclick="empTab('elements',this)">Pay elements</div>
+        <div class="tab" onclick="empTab('aoe',this)">AOEs &amp; DEOs</div>
+        <div class="tab" onclick="empTab('docs',this)">P45 / P60</div>
+        <div class="tab" onclick="empTab('pension',this)">Pension</div>
+      </div>
+      <div class="emp-tab-panel visible" id="emp-personal">
+        <div class="grid-2">
+          <div class="card"><div class="card-header"><div class="card-title">Personal details</div><button class="btn btn-sm">Edit</button></div>
+            <div class="info-row"><span class="info-label">Full name</span><span class="info-value">Emma Walsh</span></div>
+            <div class="info-row"><span class="info-label">Date of birth</span><span class="info-value">14 Mar 1994</span></div>
+            <div class="info-row"><span class="info-label">NI number</span><span class="info-value mono">AB 12 34 00 A</span></div>
+            <div class="info-row"><span class="info-label">Address</span><span class="info-value">12 High St, Birmingham, B1 1AA</span></div>
+            <div class="info-row"><span class="info-label">Email</span><span class="info-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="21440f56404d524961444c40484d0f424e4c">[email&#160;protected]</a></span></div>
+          </div>
+          <div class="card" id="emp-personal-details"><div class="card-header"><div class="card-title">Employment details</div><button class="btn btn-sm">Edit</button></div>
+            <div class="info-row"><span class="info-label">Start date</span><span class="info-value" data-f="start">6 Jan 2023</span></div>
+            <div class="info-row"><span class="info-label">Pay type</span><span class="info-value" data-f="payType">Hourly · £13.85/hr</span></div>
+            <div class="info-row"><span class="info-label">Pay frequency</span><span class="info-value" data-f="freq">Weekly</span></div>
+            <div class="info-row"><span class="info-label">Department</span><span class="info-value" data-f="dept">Front of house — Site A</span></div>
+            <div class="info-row"><span class="info-label">Tax code</span><span class="info-value mono" data-f="taxCode">1257L</span></div>
+            <div class="info-row"><span class="info-label">NI category</span><span class="info-value" data-f="niCat">A</span></div>
+          </div>
+          <div class="card"><div class="card-header"><div class="card-title">Tax &amp; NI</div><div class="pulled">↻ DPS updated this run</div></div>
+            <div class="info-row"><span class="info-label">Tax code</span><span class="info-value mono">1257L</span></div>
+            <div class="info-row"><span class="info-label">Basis</span><span class="info-value">Cumulative</span></div>
+            <div class="info-row"><span class="info-label">NI category</span><span class="info-value mono">A</span></div>
+            <div class="info-row"><span class="info-label">Student loan</span><span class="info-value">None</span></div>
+          </div>
+          <div class="card"><div class="card-header"><div class="card-title">Bank details</div><button class="btn btn-sm">Edit</button></div>
+            <div class="info-row"><span class="info-label">Account holder</span><span class="info-value">Emma Walsh</span></div>
+            <div class="info-row"><span class="info-label">Sort code</span><span class="info-value mono">20-00-00</span></div>
+            <div class="info-row"><span class="info-label">Account number</span><span class="info-value mono">●●●●●●89</span></div>
+            <div class="info-row"><span class="info-label">Payment method</span><span class="info-value">BACS</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="emp-tab-panel" id="emp-ytd">
+        <div class="metrics g4">
+          <div class="metric m-green"><div class="metric-label">YTD Gross</div><div class="metric-value">£7,832</div><div class="metric-sub">Tax year 2025/26</div></div>
+          <div class="metric"><div class="metric-label">YTD PAYE</div><div class="metric-value">£1,254</div></div>
+          <div class="metric"><div class="metric-label">YTD NI (EE)</div><div class="metric-value">£627</div></div>
+          <div class="metric m-blue"><div class="metric-label">YTD Net</div><div class="metric-value">£5,951</div></div>
+        </div>
+        <div class="card"><div class="card-title" style="margin-bottom:14px">Pay history</div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Period</th><th class="td-num">Hours</th><th class="td-num">Gross</th><th class="td-num">PAYE</th><th class="td-num">NI (EE)</th><th class="td-num" style="color:var(--text2)">NI (ER)</th><th class="td-num" style="color:var(--success-text)">Pension EE</th><th class="td-num" style="color:var(--teal-text)">Pension ER</th><th class="td-num">Net pay</th><th></th></tr></thead>
+            <tbody id="pay-history-tbody"></tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="emp-tab-panel" id="emp-elements">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Additions &amp; deductions</div><button class="btn btn-sm btn-primary" onclick="showModal('modal-add-element')">+ Add element</button></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Pay element</th><th>Type</th><th>Amount</th><th>Frequency</th><th>Effective</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="font-600">Travel allowance</td><td><span class="pe-tag pe-add">Addition</span></td><td class="td-num">£50.00</td><td>Weekly</td><td>1 Jan 2026</td><td><span class="badge badge-success">Active</span></td><td><button class="btn btn-xs">Edit</button></td></tr>
+              <tr><td class="font-600">Salary sacrifice (pension)</td><td><span class="pe-tag pe-ded">Deduction</span></td><td class="td-num">£27.70</td><td>Weekly</td><td>6 Jan 2023</td><td><span class="badge badge-success">Active</span></td><td><button class="btn btn-xs">Edit</button></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="emp-tab-panel" id="emp-aoe">
+        <div class="alert alert-warning"><div class="alert-icon">⚠</div><div><span class="alert-title">Multiple orders active.</span> Deductions applied in priority order. Protected earnings enforced each run.</div></div>
+        <div class="aoe-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div class="flex-center gap-12"><div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">1</div><div><div class="font-600 text-sm">County Court — Birmingham CC · BCJ-2024-00421</div><div class="text-xs text-hint">Regular deduction order</div></div></div>
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"><div><div class="text-xs text-hint">Per run</div><div class="text-sm font-600">£45.00</div></div><div><div class="text-xs text-hint">Protected earnings</div><div class="text-sm font-600">£320/wk</div></div><div><div class="text-xs text-hint">Total owed</div><div class="text-sm font-600">£1,800</div></div><div><div class="text-xs text-hint">Paid to date</div><div class="text-sm font-600 metric-up">£540</div></div></div>
+          <div class="progress-wrap"><div class="progress-bar pb-green" style="width:30%"></div></div>
+          <div class="text-xs text-hint mt-4">30% cleared · Est. Nov 2026</div>
+        </div>
+      </div>
+      <div class="emp-tab-panel" id="emp-docs">
+        <div class="grid-2">
+          <div class="card"><div class="card-header"><div class="card-title">P45 / Starter declaration</div><button class="btn btn-sm">Upload P45</button></div>
+            <div class="info-row"><span class="info-label">Starter declaration</span><span class="info-value">B — had another job</span></div>
+            <div class="info-row"><span class="info-label">P45 upload</span><div class="flex-center gap-8"><span class="badge badge-success">Uploaded</span><button class="btn btn-xs">View</button></div></div>
+            <div class="info-row"><span class="info-label">P45 gross (prev)</span><span class="info-value mono">£18,420.00</span></div>
+            <div class="info-row"><span class="info-label">P45 tax paid (prev)</span><span class="info-value mono">£2,948.00</span></div>
+          </div>
+          <div class="card"><div class="card-title" style="margin-bottom:14px">P60s</div>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Tax year</th><th>Gross</th><th>Tax paid</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>2024/25</td><td class="td-num">£27,850</td><td class="td-num">£3,914</td><td><button class="btn btn-xs btn-primary">Download</button></td></tr>
+                <tr><td>2023/24</td><td class="td-num">£25,100</td><td class="td-num">£3,352</td><td><button class="btn btn-xs btn-primary">Download</button></td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+      </div>
+      <div class="emp-tab-panel" id="emp-pension">
+        <div class="grid-2" style="margin-bottom:16px">
+          <div class="card no-mb"><div class="card-header"><div class="card-title">Auto-enrolment</div><button class="btn btn-sm">Edit</button></div>
+            <div class="info-row"><span class="info-label">Scheme</span><span class="info-value">NEST — The Coffee Co.</span></div>
+            <div class="info-row"><span class="info-label">Status</span><span class="info-value"><span class="badge badge-success">Enrolled</span></span></div>
+            <div class="info-row"><span class="info-label">Enrolment date</span><span class="info-value">6 Jan 2023</span></div>
+            <div class="info-row"><span class="info-label">Employee contribution</span><span class="info-value" id="pension-ee-rate">5% (salary sacrifice)</span></div>
+            <div class="info-row"><span class="info-label">Employer contribution</span><span class="info-value" id="pension-er-rate">3%</span></div>
+            <div class="info-row"><span class="info-label">Basis</span><span class="info-value">Qualifying earnings (£6,240–£50,270)</span></div>
+          </div>
+          <div class="card no-mb">
+            <div class="metrics" style="grid-template-columns:1fr 1fr 1fr;gap:10px">
+              <div class="metric m-green"><div class="metric-label">Employee YTD</div><div class="metric-value" style="font-size:18px">—</div><div class="metric-sub">Salary sacrifice</div></div>
+              <div class="metric m-blue"><div class="metric-label">Employer YTD</div><div class="metric-value" style="font-size:18px">—</div><div class="metric-sub">Employer cost</div></div>
+              <div class="metric m-gold"><div class="metric-label">Total YTD</div><div class="metric-value" style="font-size:18px">—</div><div class="metric-sub">Combined</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Pension contribution history</div></div>
+          <div class="table-wrap"><table>
+            <thead><tr>
+              <th>Period</th>
+              <th class="td-num">Gross pay</th>
+              <th class="td-num td-muted">Qualifying earnings</th>
+              <th class="td-num" style="color:var(--success-text)">EE contribution</th>
+              <th class="td-num" style="color:var(--teal-text)">ER contribution</th>
+              <th class="td-num">Total</th>
+            </tr></thead>
+            <tbody id="pension-history-tbody"></tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ONBOARDING ═══ -->
+    <div class="screen" id="screen-onboarding">
+      <div class="page-header">
+        <div><div class="page-title">Employee onboarding</div><div class="page-sub">New employees and API-imported profiles</div></div>
+        <div class="page-actions">
+          <button class="btn btn-sm" onclick="showModal('modal-fps')">Upload FPS</button>
+          <button class="btn btn-primary" onclick="showModal('modal-new-employee')">+ Add employee</button>
+        </div>
+      </div>
+      <div class="api-banner"><span class="dot dot-blue" style="background:var(--teal)"></span><strong>API sync active</strong> — Employee data pulled from S4Labour integration. Last sync: today 08:14.</div>
+      <div class="card">
+        <div class="table-wrap"><table>
+          <thead><tr><th>Employee</th><th>Location</th><th>Start date</th><th>NI number</th><th>Personal</th><th>Tax &amp; NI</th><th>Bank</th><th>P45/Decl</th><th>Pension</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="font-600">Jamie Lee</div><div class="text-xs text-hint">Barista</div></td>
+              <td><span class="tag">Birmingham HQ</span></td>
+              <td>1 Apr 2026</td><td class="mono td-muted">AB123456C</td>
+              <td><span class="badge badge-success">✓</span></td><td><span class="badge badge-success">✓</span></td><td><span class="badge badge-success">✓</span></td>
+              <td><span class="badge badge-warning">Pending</span></td><td><span class="badge badge-success">✓</span></td>
+              <td><span class="badge badge-warning">In progress</span></td>
+              <td><button class="btn btn-xs btn-primary" onclick="nav('employee-profile',null,'org')">Open</button></td>
+            </tr>
+            <tr>
+              <td><div class="font-600">Fatima Osei</div><div class="text-xs text-hint">Supervisor</div></td>
+              <td><span class="tag">Coventry Branch</span></td>
+              <td>1 Apr 2026</td><td class="mono td-muted">CD987654A</td>
+              <td><span class="badge badge-success">✓</span></td><td><span class="badge badge-success">✓</span></td><td><span class="badge badge-danger">Missing</span></td>
+              <td><span class="badge badge-success">✓</span></td><td><span class="badge badge-warning">Pending</span></td>
+              <td><span class="badge badge-warning">In progress</span></td>
+              <td><button class="btn btn-xs btn-primary" onclick="nav('employee-profile',null,'org')">Open</button></td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- ═══ LIFE EVENTS ═══ -->
+    <div class="screen" id="screen-life-events">
+      <div class="page-header">
+        <div><div class="page-title">Life events</div><div class="page-sub">Statutory leave, pay and return-to-work</div></div>
+        <button class="btn btn-primary" onclick="showModal('modal-life-event')">+ New life event</button>
+      </div>
+      <div class="alert alert-info"><div class="alert-icon">ℹ</div><div><span class="alert-title">Statutory rates 2025/26:</span> SMP/SPP — 90% AWE first 6 weeks, then £184.03/wk. SSP £116.75/wk. KIT days: up to 10 per event.</div></div>
+      <div class="le-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div class="flex-center gap-12"><div style="font-size:24px">🤱</div><div><div class="font-600">Sarah Mitchell — Maternity (SMP)</div><div class="text-xs text-hint">EWC: 14 Feb 2026 · Leave: 3 Feb 2026 → 2 Feb 2027</div></div></div>
+          <div class="flex gap-8"><span class="badge badge-purple">Week 8 of 39</span><button class="btn btn-sm">Manage</button></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:10px">
+          <div><div class="text-xs text-hint">AWE</div><div class="text-sm font-600">£615.38/wk</div></div>
+          <div><div class="text-xs text-hint">Wks 1–6 (90%)</div><div class="text-sm font-600">£553.85/wk</div></div>
+          <div><div class="text-xs text-hint">Wks 7–39</div><div class="text-sm font-600">£184.03/wk</div></div>
+          <div><div class="text-xs text-hint">KIT days used</div><div class="text-sm font-600">2 of 10</div></div>
+          <div><div class="text-xs text-hint">Return date</div><div class="text-sm font-600">15 Oct 2026</div></div>
+        </div>
+        <div class="progress-wrap"><div class="progress-bar pb-purple" style="width:20%"></div></div>
+        <div class="text-xs text-hint mt-4">Week 8 of 39 · Paying flat rate £184.03/wk</div>
+      </div>
+      <div class="le-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div class="flex-center gap-12"><div style="font-size:24px">👶</div><div><div class="font-600">Daniel Park — Paternity (SPP)</div><div class="text-xs text-hint">EWC: 28 Mar 2026 · Leave: 1–14 Apr 2026</div></div></div>
+          <div class="flex gap-8"><span class="badge badge-info">Active</span><button class="btn btn-sm">Manage</button></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <div><div class="text-xs text-hint">AWE</div><div class="text-sm font-600">£554.00/wk</div></div>
+          <div><div class="text-xs text-hint">SPP rate</div><div class="text-sm font-600">£184.03/wk</div></div>
+          <div><div class="text-xs text-hint">Duration</div><div class="text-sm font-600">2 weeks</div></div>
+          <div><div class="text-xs text-hint">Return</div><div class="text-sm font-600">15 Apr 2026</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAYSLIPS ═══ -->
+    <div class="screen" id="screen-payslips">
+      <div class="page-header">
+        <div><div class="page-title">Payslips &amp; P60s</div><div class="page-sub">Employee portal · auto-generated on run finalisation</div></div>
+        <button class="btn btn-primary">Generate batch</button>
+      </div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Period</th><th>Employees</th><th>Generated</th><th>Portal status</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>W13 Mar 2026</td><td>84</td><td>28 Mar 2026</td><td><span class="badge badge-success">Published</span></td><td><button class="btn btn-xs">View all</button></td></tr>
+          <tr><td>Mar 2026 Monthly</td><td>12</td><td>28 Mar 2026</td><td><span class="badge badge-success">Published</span></td><td><button class="btn btn-xs">View all</button></td></tr>
+          <tr><td>W12 Mar 2026</td><td>84</td><td>21 Mar 2026</td><td><span class="badge badge-success">Published</span></td><td><button class="btn btn-xs">View all</button></td></tr>
+        </tbody>
+      </table></div></div>
+    </div>
+
+    <!-- ═══ PAY ELEMENTS ═══ -->
+    <div class="screen" id="screen-pay-elements">
+      <div class="page-header">
+        <div><div class="page-title">Pay elements</div><div class="page-sub">Global system elements + org-specific library</div></div>
+        <button class="btn btn-primary" onclick="showModal('modal-create-pe')">+ Create element</button>
+      </div>
+      <div class="tabs" id="pe-tabs">
+        <div class="tab active" onclick="peLibTab('global',this)">Global elements</div>
+        <div class="tab" onclick="peLibTab('org',this)">Org-specific — The Coffee Co.</div>
+      </div>
+      <div id="pe-global"><div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Category</th><th>Type</th><th>Calculation</th><th>PAYE</th><th>NI</th><th>Pension</th></tr></thead>
+        <tbody>
+          <tr><td class="font-600">SMP</td><td><span class="badge badge-purple">Statutory</span></td><td><span class="pe-tag pe-add">Addition</span></td><td>90% AWE wks 1–6, then £184.03</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="font-600">SPP / ShPP / SAP</td><td><span class="badge badge-purple">Statutory</span></td><td><span class="pe-tag pe-add">Addition</span></td><td>£184.03/wk flat</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="font-600">SSP</td><td><span class="badge badge-purple">Statutory</span></td><td><span class="pe-tag pe-add">Addition</span></td><td>£116.75/wk</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="font-600">Student loan Plan 1</td><td><span class="badge badge-neutral">HMRC</span></td><td><span class="pe-tag pe-ded">Deduction</span></td><td>9% above £24,990</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="font-600">Student loan Plan 2</td><td><span class="badge badge-neutral">HMRC</span></td><td><span class="pe-tag pe-ded">Deduction</span></td><td>9% above £27,295</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table></div></div></div>
+      <div id="pe-org" style="display:none"><div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Type</th><th>Amount / rate</th><th>Recurring</th><th>PAYE</th><th>NI</th><th>Pension</th><th>Assigned to</th><th></th></tr></thead>
+        <tbody>
+          <tr><td class="font-600">Travel allowance</td><td><span class="pe-tag pe-add">Addition</span></td><td class="td-num">£50.00</td><td>Yes</td><td>✓</td><td>✓</td><td>—</td><td>12 employees</td><td><button class="btn btn-xs">Edit</button></td></tr>
+          <tr><td class="font-600">Christmas bonus</td><td><span class="pe-tag pe-add">Addition</span></td><td class="td-num">Variable</td><td>No</td><td>✓</td><td>✓</td><td>—</td><td>84 employees</td><td><button class="btn btn-xs">Edit</button></td></tr>
+          <tr><td class="font-600">Salary sacrifice — pension</td><td><span class="pe-tag pe-ded">Deduction</span></td><td class="td-num">5%</td><td>Yes</td><td>—</td><td>—</td><td>✓</td><td>84 employees</td><td><button class="btn btn-xs">Edit</button></td></tr>
+        </tbody>
+      </table></div></div></div>
+    </div>
+
+    <!-- ═══ REPORTS ═══ -->
+    <div class="screen" id="screen-reports">
+      <div class="page-header">
+        <div><div class="page-title">Reports &amp; BACS</div><div class="page-sub">Download outputs, submit HMRC files and generate BACS payment file</div></div>
+        <div class="page-actions">
+          <select id="report-run-sel" class="btn btn-sm" style="cursor:pointer" onchange="updateReportStatus()">
+            <option value="approved">W13 Mar 2026 — Approved ✓</option>
+            <option value="pending">Mar 2026 Monthly — Approved ✓</option>
+            <option value="inprogress">W14 Apr 2026 — In progress</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Run summary bar -->
+      <div id="report-status-bar" style="margin-bottom:16px">
+        <div class="alert alert-success" id="report-alert-approved">
+          <div class="alert-icon">✅</div>
+          <div>
+            <span class="alert-title">W13 Mar 2026 — Approved &amp; submitted.</span>
+            All reports available. FPS accepted by HMRC on 28 Mar 2026 (ref: HMRC-2026-W13-AB12345). BACS file sent 28 Mar 2026.
+          </div>
+        </div>
+        <div class="alert alert-warning" id="report-alert-inprogress" style="display:none">
+          <div class="alert-icon">⏳</div>
+          <div><span class="alert-title">W14 Apr 2026 — Run in progress.</span> Reports will be available once the run is approved and FPS submitted to HMRC.</div>
+        </div>
+      </div>
+
+      <!-- BACS panel -->
+      <div class="card" style="border-left:4px solid var(--teal)">
+        <div class="card-header">
+          <div>
+            <div class="card-title">💳 BACS payment file</div>
+            <div class="card-sub">Standard 18 format · Net pay for 84 employees · £26,458.00 total</div>
+          </div>
+          <div class="card-actions">
+            <span class="badge badge-success">BACS sent 28 Mar 2026</span>
+            <button class="btn btn-sm btn-primary" id="bacs-download-btn">Download BACS file</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+          <div><div class="text-xs text-hint">Total net pay</div><div class="font-600 text-sm" style="font-family:'DM Mono',monospace"><span id="bacs-net-total">—</span></div></div>
+          <div><div class="text-xs text-hint">Employees</div><div class="font-600 text-sm"><span id="bacs-emp-count">—</span></div></div>
+          <div><div class="text-xs text-hint">Service user number</div><div class="font-600 text-sm" style="font-family:'DM Mono',monospace">123456</div></div>
+          <div><div class="text-xs text-hint">Processing date</div><div class="font-600 text-sm">4 Apr 2026</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="card-title" style="font-size:12px;margin-bottom:10px">BACS detail (sample)</div>
+        <div class="table-wrap"><table style="font-size:12px">
+          <thead><tr><th>Employee</th><th>Sort code</th><th>Account</th><th class="td-num">Net pay</th><th>Reference</th></tr></thead>
+          <tbody id="bacs-detail-tbody"></tbody>
+        </table></div>
+      </div>
+
+      <!-- HMRC submissions -->
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">🏛 HMRC submissions</div><div class="card-sub">RTI Full Payment Submission · EPS records</div></div>
+          <span class="badge badge-success">FPS accepted by HMRC</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+          <div><div class="text-xs text-hint">Submission type</div><div class="font-600 text-sm">Full Payment Submission (FPS)</div></div>
+          <div><div class="text-xs text-hint">Submitted</div><div class="font-600 text-sm">28 Mar 2026 at 09:14</div></div>
+          <div><div class="text-xs text-hint">HMRC correlation ID</div><div class="font-600 text-sm" style="font-family:'DM Mono',monospace">HMRC-2026-W13-AB12345</div></div>
+          <div><div class="text-xs text-hint">PAYE to HMRC</div><div class="font-600 text-sm" style="font-family:'DM Mono',monospace">£5,793.00</div></div>
+          <div><div class="text-xs text-hint">NI to HMRC (total)</div><div class="font-600 text-sm" style="font-family:'DM Mono',monospace">£6,948.00</div></div>
+          <div><div class="text-xs text-hint">Payment due</div><div class="font-600 text-sm">19 Apr 2026 (PAYE month end)</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-sm">Download FPS file (.xml)</button>
+          <button class="btn btn-sm">View HMRC receipt</button>
+          <button class="btn btn-sm">P32 Employer Payment Summary</button>
+        </div>
+      </div>
+
+      <!-- Report downloads grid -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">📁 All report downloads — W13 Mar 2026</div></div>
+        <div class="report-grid">
+          <div class="report-item"><div class="report-icon" style="background:var(--success-bg)">📊</div><div><div class="report-name">P32 Employer Payment Summary</div><div class="report-desc">PAYE &amp; NI due to HMRC · .pdf</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--teal-bg)">📤</div><div><div class="report-name">Full Payment Submission (FPS)</div><div class="report-desc">RTI XML submission file</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--accent-light)">📋</div><div><div class="report-name">Detailed Payroll Report</div><div class="report-desc">Per-employee full breakdown</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--purple-bg)">🏦</div><div><div class="report-name">Pension Contributions Report</div><div class="report-desc">EE &amp; ER totals by employee</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--gold-bg)">📈</div><div><div class="report-name">Standard Payroll Summary</div><div class="report-desc">By department / site</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--warning-bg)">📅</div><div><div class="report-name">Year-to-Date Report</div><div class="report-desc">Cumulative YTD all employees</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--danger-bg)">📑</div><div><div class="report-name">P11 Summary Report</div><div class="report-desc">HMRC deductions working sheet</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--teal-bg)">🧾</div><div><div class="report-name">PAPDIS Pension File</div><div class="report-desc">Standard pension provider format</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--surface2)">👥</div><div><div class="report-name">Employee Summary CSV</div><div class="report-desc">All employees with YTD values</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--success-bg)">🏢</div><div><div class="report-name">NEST Provider Enrolment File</div><div class="report-desc">New employee enrolment data</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item"><div class="report-icon" style="background:var(--purple-bg)">💰</div><div><div class="report-name">NEST Contribution File</div><div class="report-desc">Monthly pension contributions</div></div><button class="btn btn-xs" style="margin-left:auto">↓</button></div>
+          <div class="report-item" style="border-color:var(--teal);background:var(--teal-bg)"><div class="report-icon" style="background:#fff">💳</div><div><div class="report-name" style="color:var(--teal-text)">BACS Payment File</div><div class="report-desc" style="color:var(--teal-text);opacity:0.8">Standard 18 · net pay instructions</div></div><button class="btn btn-xs btn-primary" style="margin-left:auto">↓</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ORG SETTINGS ═══ -->
+    <div class="screen" id="screen-org-settings">
+      <div class="page-header">
+        <div><div class="page-title">Org settings</div><div class="page-sub" id="orgsettings-sub">The Coffee Co. — edit configuration</div></div>
+        <button class="btn btn-primary">Save changes</button>
+      </div>
+      <div class="tabs" id="os-tabs">
+        <div class="tab active" onclick="osTab('company',this)">Company</div>
+        <div class="tab" onclick="osTab('paye',this)">PAYE schemes</div>
+        <div class="tab" onclick="osTab('locations',this)">Locations</div>
+        <div class="tab" onclick="osTab('schedules',this)">Pay schedules</div>
+        <div class="tab" onclick="osTab('users',this)">Users</div>
+      </div>
+      <div id="os-company"><div class="card"><div class="card-header"><div class="card-title">Company details</div></div>
+        <div class="form-section"><div class="form-section-title">Legal entity</div>
+          <div class="form-row fr-2"><div class="form-group"><label>Legal name</label><input value="The Coffee Co. Ltd"></div><div class="form-group"><label>Trading name</label><input value="The Coffee Co."></div></div>
+          <div class="form-row fr-3"><div class="form-group"><label>Company number</label><input class="mono" value="09876543"></div><div class="form-group"><label>Sector</label><select><option>Hospitality &amp; food service</option></select></div><div class="form-group"><label>Postcode</label><input class="mono" value="B1 1AA"></div></div>
+        </div>
+      </div></div>
+      <div id="os-paye" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">PAYE schemes</div><div class="card-sub">Each scheme has its own RTI credentials, locations and pay schedules. Create additional schemes for separate legal entities or cost-centre billing.</div></div>
+            <button class="btn btn-sm btn-primary" onclick="showModal('modal-new-paye-scheme')">+ Add PAYE scheme</button>
+          </div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>PAYE reference</th><th>Accounts office ref</th><th>Scheme name</th><th>Locations</th><th>Employees</th><th>RTI</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="mono font-600">120/AB12345</td>
+                <td class="mono td-muted text-sm">120PA00123456</td>
+                <td><div class="font-600">Main scheme</div><div class="text-xs text-hint">Primary PAYE registration</div></td>
+                <td>2 locations</td><td>84</td>
+                <td><span class="badge badge-success">✓ Live</span></td>
+                <td class="td-action"><button class="btn btn-xs" onclick="osTab('locations',null)">Locations →</button><button class="btn btn-xs">Edit</button></td>
+              </tr>
+            </tbody>
+          </table></div>
+          <div class="divider"></div>
+          <div class="alert alert-accent" style="margin-bottom:0"><div class="alert-icon">ℹ</div><div><span class="alert-title">Adding a new PAYE scheme</span> walks through the same onboarding journey (HMRC credentials, RTI test, locations, pay schedules). Each scheme is reported and billed independently.</div></div>
+        </div>
+      </div>
+
+      <div id="os-locations" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Locations — Main scheme (120/AB12345)</div><div class="card-sub">Physical locations linked to this PAYE scheme. Cost centres appear on payroll reports for reconciliation.</div></div>
+            <button class="btn btn-sm btn-primary" onclick="showModal('modal-new-location')">+ Add location</button>
+          </div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Location name</th><th>Address</th><th>Code</th><th>Cost centre</th><th>Employees</th><th>PAYE scheme</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="font-600">Birmingham HQ</div></td>
+                <td class="td-muted text-sm">12 High St, Birmingham B1 1AA</td>
+                <td class="mono td-muted">LOC-001</td><td class="mono td-muted">CC-BIRM</td>
+                <td>52</td><td class="mono text-sm td-muted">120/AB12345</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td class="td-action"><button class="btn btn-xs">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="font-600">Coventry Branch</div></td>
+                <td class="td-muted text-sm">8 Retail Park, Coventry CV1 2EF</td>
+                <td class="mono td-muted">LOC-002</td><td class="mono td-muted">CC-COV</td>
+                <td>32</td><td class="mono text-sm td-muted">120/AB12345</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td class="td-action"><button class="btn btn-xs">Edit</button></td>
+              </tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <div id="os-hmrc" style="display:none"><div class="card"><div class="card-header"><div class="card-title">HMRC &amp; RTI</div></div>
+        <div class="form-row fr-2"><div class="form-group"><label>PAYE reference</label><input class="mono" value="120/AB12345"></div><div class="form-group"><label>Accounts office ref</label><input class="mono" value="120PA00123456"></div></div>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:12px"><button class="btn btn-sm" onclick="testRTI2()">Re-test connection</button><span id="rti2-result" class="badge badge-success">✓ Connected · Last verified 28 Mar 2026</span></div>
+        <div class="divider"></div>
+        <div class="card-title" style="margin-bottom:14px">RTI submission log</div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Date</th><th>Type</th><th>Period</th><th>Employees</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>28 Mar 2026</td><td>FPS</td><td>W13 2026</td><td>84</td><td><span class="badge badge-success">Accepted</span></td><td><button class="btn btn-xs">Receipt</button></td></tr>
+            <tr><td>21 Mar 2026</td><td>FPS</td><td>W12 2026</td><td>84</td><td><span class="badge badge-success">Accepted</span></td><td><button class="btn btn-xs">Receipt</button></td></tr>
+          </tbody>
+        </table></div>
+      </div></div>
+      <div id="os-schedules" style="display:none"><div class="card"><div class="card-header"><div class="card-title">Pay schedules</div><button class="btn btn-sm btn-primary">+ Add schedule</button></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Name</th><th>Frequency</th><th>Pay day</th><th>BACS days</th><th>Employees</th><th>Next run</th><th></th></tr></thead>
+          <tbody>
+            <tr><td class="font-600">Weekly staff</td><td><span class="tag">Weekly</span></td><td>Friday</td><td>3</td><td>72</td><td>4 Apr 2026</td><td><button class="btn btn-xs">Edit</button></td></tr>
+            <tr><td class="font-600">Monthly salaried</td><td><span class="tag">Monthly</span></td><td>Last working day</td><td>3</td><td>12</td><td>30 Apr 2026</td><td><button class="btn btn-xs">Edit</button></td></tr>
+          </tbody>
+        </table></div>
+      </div></div>
+      <div id="os-users" style="display:none"><div class="card"><div class="card-header"><div class="card-title">Users with access</div><button class="btn btn-sm btn-primary" onclick="showModal('modal-create-user')">+ Add user</button></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>User</th><th>Role</th><th>Last login</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><div class="font-600">James Ashworth</div><div class="text-xs text-hint"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f75317e6c7768706d6b775f6c2b737e7d706a6d317c70316a74">[email&#160;protected]</a></div></td><td><span class="badge badge-gold">Super Admin</span></td><td>Today</td><td><button class="btn btn-xs">Edit</button></td></tr>
+            <tr><td><div class="font-600">Sarah Patel</div><div class="text-xs text-hint"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9cefb2ecfde8f9f0dcefa8f0fdfef3e9eeb2fff3b2e9f7">[email&#160;protected]</a></div></td><td><span class="badge badge-accent">Bureau Admin</span></td><td>Today</td><td><button class="btn btn-xs">Edit</button></td></tr>
+            <tr><td><div class="font-600">Donna Wright</div><div class="text-xs text-hint"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="36521841445f515e427655595050535355591855595b">[email&#160;protected]</a></div></td><td><span class="badge badge-info">Org Admin</span></td><td>Today</td><td><button class="btn btn-xs">Edit</button></td></tr>
+          </tbody>
+        </table></div>
+      </div></div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /app -->
+
+<!-- Run Detail -->
+<div class="modal-overlay" id="modal-run-detail" style="display:none" onclick="closeModal('modal-run-detail',event)">
+  <div class="modal modal-lg" onclick="event.stopPropagation()">
+    <div class="modal-title">Payroll run — W13 Mar 2026</div>
+    <div class="modal-sub">The Coffee Co. · 84 employees · Weekly</div>
+    <div class="pipeline"><div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">Hours entered</div></div><div class="pipe-step done"><div class="pipe-dot">✓</div><div class="pipe-label">Calculation</div></div><div class="pipe-step active"><div class="pipe-dot">3</div><div class="pipe-label">Review</div></div><div class="pipe-step pending"><div class="pipe-dot">4</div><div class="pipe-label">HMRC</div></div><div class="pipe-step pending"><div class="pipe-dot">5</div><div class="pipe-label">Reports</div></div><div class="pipe-step pending"><div class="pipe-dot">6</div><div class="pipe-label">BACS</div></div></div>
+    <div class="metrics g3" style="margin-bottom:16px">
+      <div class="metric m-green"><div class="metric-label">Gross pay</div><div class="metric-value">£36,210</div></div>
+      <div class="metric"><div class="metric-label">Net pay</div><div class="metric-value">£26,458</div></div>
+      <div class="metric m-red"><div class="metric-label">PAYE + NI due</div><div class="metric-value">£12,741</div></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Employee</th><th>Hours</th><th class="td-num">Gross</th><th class="td-num">PAYE</th><th class="td-num">NI (EE)</th><th class="td-num" style="color:var(--text2)">NI (ER)</th><th class="td-num" style="color:var(--success-text)">Pension EE</th><th class="td-num" style="color:var(--teal-text)">Pension ER</th><th class="td-num font-600">Net</th></tr></thead>
+      <tbody id="run-detail-tbody"></tbody>
+    </table></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-run-detail')">Close</button><button class="btn btn-sm" onclick="closeModal('modal-run-detail');showModal('modal-run-amend')">Amend</button><button class="btn btn-primary" onclick="closeModal('modal-run-detail');showModal('modal-run-approve')">Approve run</button></div>
+  </div>
+</div>
+
+<!-- Approve run -->
+<div class="modal-overlay" id="modal-run-approve" style="display:none" onclick="closeModal('modal-run-approve',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Approve payroll run</div>
+    <div class="modal-sub">W13 Mar 2026 · The Coffee Co. · 84 employees</div>
+    <div class="alert alert-warning"><div class="alert-icon">⚠</div><div><span class="alert-title">Confirm before approving.</span> Once approved, an FPS will be submitted to HMRC and BACS file generated. This cannot be undone without an EYU.</div></div>
+    <div class="info-row"><span class="info-label">Gross pay</span><span class="info-value mono">£36,210.00</span></div>
+    <div class="info-row"><span class="info-label">Net pay (BACS)</span><span class="info-value mono">£26,458.00</span></div>
+    <div class="info-row"><span class="info-label">PAYE to HMRC</span><span class="info-value mono">£5,793.00</span></div>
+    <div class="info-row"><span class="info-label">NI to HMRC</span><span class="info-value mono">£6,948.00</span></div>
+    <div class="info-row"><span class="info-label">Pay date</span><span class="info-value">4 Apr 2026</span></div>
+    <div class="form-group" style="margin-top:16px"><label>Approver notes (optional)</label><textarea placeholder="Any notes for the approval record..."></textarea></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-run-approve')">Cancel</button><button class="btn btn-success" onclick="approveRun()">✓ Approve &amp; submit to HMRC</button></div>
+  </div>
+</div>
+
+<!-- Amend run -->
+<div class="modal-overlay" id="modal-run-amend" style="display:none" onclick="closeModal('modal-run-amend',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Amend payroll run</div>
+    <div class="modal-sub">W13 Mar 2026 · Changes are audit-logged with timestamp and user</div>
+    <div class="form-row fr-2">
+      <div class="form-group"><label>Employee</label><select><option>Emma Walsh</option><option>Oliver Brown</option><option>Priya Sharma</option></select></div>
+      <div class="form-group"><label>Amendment type</label><select><option>Hours correction</option><option>One-off addition</option><option>One-off deduction</option></select></div>
+    </div>
+    <div class="form-row fr-2">
+      <div class="form-group"><label>New value</label><input type="number" placeholder="Enter corrected value"></div>
+      <div class="form-group"><label>Effective</label><select><option>This run</option><option>Backdated</option></select></div>
+    </div>
+    <div class="form-group"><label>Reason (required for audit)</label><textarea placeholder="Describe why this amendment is being made..."></textarea></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-run-amend')">Cancel</button><button class="btn btn-primary" onclick="closeModal('modal-run-amend')">Save &amp; recalculate</button></div>
+  </div>
+</div>
+
+<!-- New run — Manual -->
+<div class="modal-overlay" id="modal-new-run-manual" style="display:none" onclick="closeModal('modal-new-run-manual',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <div style="width:32px;height:32px;border-radius:8px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px">✏️</div>
+      <div class="modal-title" style="margin-bottom:0">Manual payroll run</div>
+    </div>
+    <div class="modal-sub">Hours will be entered manually or via bulk CSV upload after the run is created.</div>
+    <div class="form-row fr-2">
+      <div class="form-group"><label>Schedule</label><select><option>Weekly staff — W14 (31 Mar–6 Apr)</option><option>Monthly salaried — Apr 2026</option></select></div>
+      <div class="form-group"><label>Pay period</label><select><option>W14 — 31 Mar to 6 Apr 2026</option><option>W15 — 7 Apr to 13 Apr 2026</option></select></div>
+    </div>
+    <div class="alert alert-info"><div class="alert-icon">ℹ</div><div>After creating, you'll be taken to the Hours &amp; amendments screen to enter or import hours. The calculation will run once all hours are confirmed.</div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-new-run-manual')">Cancel</button><button class="btn btn-primary" onclick="closeModal('modal-new-run-manual');nav('hours',null,'org')">Create run → Enter hours</button></div>
+  </div>
+</div>
+
+<!-- New run — API -->
+<div class="modal-overlay" id="modal-new-run-api" style="display:none" onclick="closeModal('modal-new-run-api',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <div style="width:32px;height:32px;border-radius:8px;background:var(--teal-bg);border:1px solid #8dd9e8;display:flex;align-items:center;justify-content:center;font-size:16px">⚡</div>
+      <div class="modal-title" style="margin-bottom:0">API feed payroll run</div>
+    </div>
+    <div class="modal-sub">Hours, pay rates and employee data pulled automatically from S4Labour. DPS tax codes applied before calculation.</div>
+    <div class="form-row fr-2">
+      <div class="form-group"><label>Schedule</label><select><option>Weekly staff — W14 (31 Mar–6 Apr)</option><option>Monthly salaried — Apr 2026</option></select></div>
+      <div class="form-group"><label>Pay period</label><select><option>W14 — 31 Mar to 6 Apr 2026</option></select></div>
+    </div>
+    <div style="border:1px solid #8dd9e8;border-radius:var(--radius-lg);padding:14px;background:var(--teal-bg);margin-bottom:12px">
+      <div class="text-sm font-600" style="color:var(--teal-text);margin-bottom:8px">⚡ What the API will pull:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="flex-center gap-6"><span style="color:var(--success)">✓</span><span class="text-sm" style="color:var(--teal-text)">Hours from S4Labour rota</span></div>
+        <div class="flex-center gap-6"><span style="color:var(--success)">✓</span><span class="text-sm" style="color:var(--teal-text)">Pay rates &amp; uplifts</span></div>
+        <div class="flex-center gap-6"><span style="color:var(--success)">✓</span><span class="text-sm" style="color:var(--teal-text)">84 employee records</span></div>
+        <div class="flex-center gap-6"><span style="color:var(--success)">✓</span><span class="text-sm" style="color:var(--teal-text)">DPS tax code updates</span></div>
+        <div class="flex-center gap-6"><span style="color:var(--success)">✓</span><span class="text-sm" style="color:var(--teal-text)">Holiday &amp; utility pay</span></div>
+        <div class="flex-center gap-6"><span style="color:var(--success)">✓</span><span class="text-sm" style="color:var(--teal-text)">Recurring pay elements</span></div>
+      </div>
+    </div>
+    <div class="alert alert-accent"><div class="alert-icon">ℹ</div><div>Last API sync: today 08:14. You can review the pulled data before confirming calculation. Amendments can still be made after the pull.</div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-new-run-api')">Cancel</button><button class="btn btn-primary" style="background:var(--teal);border-color:var(--teal)" onclick="closeModal('modal-new-run-api');nav('payroll-runs',null,'org')">⚡ Pull data &amp; open run →</button></div>
+  </div>
+</div>
+
+<!-- Old modal kept for compatibility -->
+<div class="modal-overlay" id="modal-new-run" style="display:none" onclick="closeModal('modal-new-run',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">New payroll run</div>
+    <div class="modal-sub">Choose how to create this run</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div style="border:1px solid var(--border2);border-radius:var(--radius-lg);padding:14px;cursor:pointer;transition:all 0.12s" onclick="closeModal('modal-new-run');showModal('modal-new-run-api')" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border2)'">
+        <div style="font-size:20px;margin-bottom:6px">⚡</div>
+        <div class="font-600 text-sm">API run</div>
+        <div class="text-xs text-hint" style="margin-top:4px">Auto-pull from S4Labour</div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:var(--radius-lg);padding:14px;cursor:pointer;transition:all 0.12s" onclick="closeModal('modal-new-run');showModal('modal-new-run-manual')" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)'">
+        <div style="font-size:20px;margin-bottom:6px">✏️</div>
+        <div class="font-600 text-sm">Manual run</div>
+        <div class="text-xs text-hint" style="margin-top:4px">Enter hours manually / CSV</div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-new-run')">Cancel</button></div>
+  </div>
+</div>
+
+<!-- API feed status -->
+<div class="modal-overlay" id="modal-api-feed-status" style="display:none" onclick="closeModal('modal-api-feed-status',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">API feed status</div>
+    <div class="modal-sub">S4Labour integration · data pull for current run</div>
+    <div class="info-row"><span class="info-label">Connection</span><span class="badge badge-success">Live</span></div>
+    <div class="info-row"><span class="info-label">Last sync</span><span class="info-value">Today 08:14</span></div>
+    <div class="info-row"><span class="info-label">Employees pulled</span><span class="info-value">84</span></div>
+    <div class="info-row"><span class="info-label">Hours data</span><span class="info-value">Available for W14</span></div>
+    <div class="info-row"><span class="info-label">Pay rates</span><span class="info-value">Synced from S4Labour</span></div>
+    <div class="info-row"><span class="info-label">DPS last run</span><span class="info-value">29 Mar 2026 — 4 tax codes updated</span></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-api-feed-status')">Close</button><button class="btn btn-primary">Force resync</button></div>
+  </div>
+</div>
+
+<!-- Add hours -->
+<div class="modal-overlay" id="modal-add-hours" style="display:none" onclick="closeModal('modal-add-hours',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Add / amend hours</div>
+    <div class="modal-sub">Manual hours entry for payroll run</div>
+    <div class="form-row fr-2"><div class="form-group"><label>Employee</label><select><option>Emma Walsh</option><option>Oliver Brown</option></select></div><div class="form-group"><label>Pay period</label><select><option>W14 — current</option><option>W13 — backdated</option></select></div></div>
+    <div class="form-row fr-3"><div class="form-group"><label>Hours worked</label><input type="number" value="40"></div><div class="form-group"><label>Effective</label><select><option>Immediately</option><option>Backdated</option></select></div><div class="form-group"><label>Date</label><input type="date" value="2026-03-31"></div></div>
+    <div class="form-group"><label>Reason / note</label><textarea placeholder="e.g. Cover shift confirmed by manager"></textarea></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-add-hours')">Cancel</button><button class="btn btn-primary">Save amendment</button></div>
+  </div>
+</div>
+
+<!-- Bulk import -->
+<div class="modal-overlay" id="modal-bulk-hours" style="display:none" onclick="closeModal('modal-bulk-hours',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Bulk import hours</div>
+    <div class="modal-sub">Upload CSV or Excel with hours for all employees</div>
+    <div class="upload-zone"><div style="font-size:28px">⬆</div><div style="font-size:14px;font-weight:500;margin-top:8px">Drop file or click to browse</div><div class="text-sm text-hint" style="margin-top:4px">.csv or .xlsx · Columns: Employee ID, Hours, Period</div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-bulk-hours')">Cancel</button><button class="btn btn-primary">Upload &amp; validate</button></div>
+  </div>
+</div>
+
+<!-- Life event -->
+<div class="modal-overlay" id="modal-life-event" style="display:none" onclick="closeModal('modal-life-event',event)">
+  <div class="modal modal-lg" onclick="event.stopPropagation()">
+    <div class="modal-title">New life event</div>
+    <div class="modal-sub">Statutory leave and pay · Rates applied per HMRC 2025/26</div>
+    <div class="form-row fr-2"><div class="form-group"><label>Employee</label><select><option>Sarah Mitchell</option><option>Daniel Park</option><option>Emma Walsh</option></select></div><div class="form-group"><label>Event type</label><select><option>— select —</option><option>Maternity (SMP)</option><option>Paternity (SPP)</option><option>Shared parental (ShPP)</option><option>Adoption (SAP)</option><option>Unpaid leave</option></select></div></div>
+    <div class="form-row fr-3"><div class="form-group"><label>EWC</label><input type="date"></div><div class="form-group"><label>Leave start</label><input type="date"></div><div class="form-group"><label>Leave end</label><input type="date"></div></div>
+    <div class="alert alert-accent"><div class="alert-icon">ℹ</div><div>Wks 1–6: 90% AWE · Wks 7+: £184.03/wk · PAYE &amp; NI apply throughout. AWE auto-calculated from last 8 weeks.</div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-life-event')">Cancel</button><button class="btn btn-primary">Save life event</button></div>
+  </div>
+</div>
+
+<!-- New employee -->
+<div class="modal-overlay" id="modal-new-employee" style="display:none" onclick="closeModal('modal-new-employee',event)">
+  <div class="modal modal-lg" onclick="event.stopPropagation()">
+    <div class="modal-title">Add new employee</div>
+    <div class="modal-sub">Creates an employee profile. Salary and department sync via API.</div>
+    <div class="form-section"><div class="form-section-title">Personal details</div>
+      <div class="form-row fr-3"><div class="form-group"><label>First name</label><input placeholder="First name"></div><div class="form-group"><label>Last name</label><input placeholder="Last name"></div><div class="form-group"><label>Date of birth</label><input type="date"></div></div>
+      <div class="form-row fr-2"><div class="form-group"><label>NI number</label><input class="mono" placeholder="AB 12 34 56 C"></div><div class="form-group"><label>Email</label><input type="email" placeholder="employee@email.com"></div></div>
+    </div>
+    <div class="form-section"><div class="form-section-title">Employment</div>
+      <div class="form-row fr-4"><div class="form-group"><label>Start date</label><input type="date"></div><div class="form-group"><label>Location</label><select><option>Birmingham HQ (LOC-001)</option><option>Coventry Branch (LOC-002)</option></select></div><div class="form-group"><label>Pay frequency</label><select><option>Weekly</option><option>Monthly</option><option>Four-weekly</option></select></div><div class="form-group"><label>NI category</label><select><option>A — Standard</option><option>B — Married women</option><option>C — Over state pension age</option><option>H — Apprentice under 25</option><option>M — Under 21</option></select></div></div>
+      <div class="pulled">↻ Department, job title and pay rate sync from S4Labour API</div>
+    </div>
+    <div class="form-section" style="margin-bottom:0"><div class="form-section-title">Starter declaration</div>
+      <div class="form-group"><label>Statement</label><select><option>A — First job since 6 April</option><option>B — Had another job since 6 April</option><option>C — Has another job currently</option></select></div>
+    </div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-new-employee')">Cancel</button><button class="btn btn-primary">Create profile →</button></div>
+  </div>
+</div>
+
+<!-- Create user -->
+<div class="modal-overlay" id="modal-create-user" style="display:none" onclick="closeModal('modal-create-user',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Create user</div>
+    <div class="modal-sub">An invite email will be sent. User sets their own password.</div>
+    <div class="form-row fr-2"><div class="form-group"><label>First name</label><input placeholder="First name"></div><div class="form-group"><label>Last name</label><input placeholder="Last name"></div></div>
+    <div class="form-group" style="margin-bottom:12px"><label>Email</label><input type="email" placeholder="user@company.com"></div>
+    <div class="form-row fr-2">
+      <div class="form-group"><label>Role</label><select id="modal-role-sel" onchange="toggleOrgAccess2()"><option value="">— select role —</option><option value="bureau">Bureau Admin</option><option value="org">Org Admin</option><option value="processor">Processor</option></select></div>
+      <div class="form-group" id="modal-org-field" style="display:none"><label>Organisation</label><select><option>The Coffee Co.</option><option>Harbour Hotels Ltd</option><option>Bright Star Retail</option></select></div>
+    </div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-create-user')">Cancel</button><button class="btn btn-primary">Send invite →</button></div>
+  </div>
+</div>
+
+<!-- Create pay element -->
+<div class="modal-overlay" id="modal-create-pe" style="display:none" onclick="closeModal('modal-create-pe',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Create pay element</div>
+    <div class="modal-sub">Org-specific element — available to assign to any employee in this organisation</div>
+    <div class="form-row fr-2"><div class="form-group"><label>Element name</label><input placeholder="e.g. Car allowance"></div><div class="form-group"><label>Type</label><select><option>Addition</option><option>Deduction</option></select></div></div>
+    <div class="form-row fr-3"><div class="form-group"><label>Default amount</label><input placeholder="£ or %"></div><div class="form-group"><label>Calculation</label><select><option>Fixed amount</option><option>% of gross</option><option>Variable per run</option></select></div><div class="form-group"><label>Recurring</label><select><option>Yes — every run</option><option>No — one-off</option></select></div></div>
+    <div class="form-section-title" style="margin:12px 0 8px">Tax treatment</div>
+    <div class="form-row fr-3"><div class="form-group"><label>PAYE?</label><select><option>Yes</option><option>No</option></select></div><div class="form-group"><label>NI?</label><select><option>Yes</option><option>No</option></select></div><div class="form-group"><label>Pensionable?</label><select><option>No</option><option>Yes</option></select></div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-create-pe')">Cancel</button><button class="btn btn-primary">Create element</button></div>
+  </div>
+</div>
+
+<!-- Add pay element to employee -->
+<div class="modal-overlay" id="modal-add-element" style="display:none" onclick="closeModal('modal-add-element',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Add pay element</div>
+    <div class="modal-sub">Select from org-specific pay element library</div>
+    <div class="form-row fr-2"><div class="form-group"><label>Pay element</label><select><option>Travel allowance (Addition)</option><option>Christmas bonus (Addition)</option><option>Salary sacrifice (Deduction)</option></select></div><div class="form-group"><label>Amount / rate</label><input placeholder="£ or %"></div></div>
+    <div class="form-row fr-2"><div class="form-group"><label>Frequency</label><select><option>One-off</option><option>Every run</option></select></div><div class="form-group"><label>Effective from</label><select><option>Current run</option><option>Future date</option><option>Backdated</option></select></div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-add-element')">Cancel</button><button class="btn btn-primary">Add element</button></div>
+  </div>
+</div>
+
+<!-- FPS upload -->
+<div class="modal-overlay" id="modal-fps" style="display:none" onclick="closeModal('modal-fps',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Upload FPS data</div>
+    <div class="modal-sub">Full Payment Submission from previous provider — imports YTD figures</div>
+    <div class="upload-zone"><div style="font-size:28px">⬆</div><div style="font-size:14px;font-weight:500;margin-top:8px">Upload FPS file</div><div class="text-sm text-hint" style="margin-top:4px">.xml HMRC FPS format</div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-fps')">Cancel</button><button class="btn btn-primary">Import FPS</button></div>
+  </div>
+</div>
+
+<!-- Notifications -->
+<div class="modal-overlay" id="modal-notifications" style="display:none" onclick="closeModal('modal-notifications',event)">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:420px">
+    <div class="modal-title">Notifications</div>
+    <div class="modal-sub">3 unread</div>
+    <div class="info-row"><div style="font-size:16px;margin-right:8px">⚠</div><div><div class="text-sm font-600">The Coffee Co. — W13 awaiting approval</div><div class="text-xs text-hint">BACS deadline: 1 Apr 2026 · 2 days remaining</div></div></div>
+    <div class="info-row"><div style="font-size:16px;margin-right:8px">👤</div><div><div class="text-sm font-600">Jamie Lee — P45 still outstanding</div><div class="text-xs text-hint">Starts 1 Apr 2026 · Emergency tax if not received</div></div></div>
+    <div class="info-row"><div style="font-size:16px;margin-right:8px">📋</div><div><div class="text-sm font-600">Greenfield Care — hours missing for W14</div><div class="text-xs text-hint">Payroll run cannot start until hours are entered</div></div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-notifications')">Dismiss all</button><button class="btn btn-primary" onclick="closeModal('modal-notifications')">Close</button></div>
+  </div>
+</div>
+
+
+<!-- Notifications modal -->
+<div class="modal-overlay" id="modal-notifications" style="display:none" onclick="closeModal('modal-notifications',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Notifications</div>
+    <div class="modal-sub">2 items require attention</div>
+    <div class="info-row"><div style="display:flex;gap:8px"><span style="font-size:16px">&#x1F464;</span><div><div class="text-sm font-600">Jamie Lee &#x2014; P45 still outstanding</div><div class="text-xs text-hint">Starts 1 Apr 2026 · Emergency tax if not received</div></div></div></div>
+    <div class="info-row"><div style="display:flex;gap:8px"><span style="font-size:16px">&#x1F4CB;</span><div><div class="text-sm font-600">2 employees pending onboarding</div><div class="text-xs text-hint">Documents required before first payroll run</div></div></div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-notifications')">Dismiss all</button><button class="btn btn-primary" onclick="closeModal('modal-notifications')">Close</button></div>
+  </div>
+</div>
+
+<!-- FPS Submit modal -->
+<div class="modal-overlay" id="modal-fps-submit" style="display:none" onclick="closeModal('modal-fps-submit',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Submit to HMRC — Full Payment Submission</div>
+    <div class="modal-sub">Mar 2026 Monthly · The Coffee Co. · 12 employees</div>
+    <div class="alert alert-info"><div class="alert-icon">i</div><div>An FPS will be sent to HMRC via RTI. This officially notifies HMRC of all payments made this period.</div></div>
+    <div class="info-row"><span class="info-label">PAYE reference</span><span class="info-value mono">120/AB12345</span></div>
+    <div class="info-row"><span class="info-label">Submission type</span><span class="info-value">Full Payment Submission (FPS)</span></div>
+    <div class="info-row"><span class="info-label">Employees included</span><span class="info-value">12</span></div>
+    <div id="fps-submit-result" style="display:none" class="alert alert-success"><div class="alert-icon">&#x2713;</div><div><span class="alert-title">FPS accepted by HMRC.</span> Correlation ID: HMRC-2026-MAR-AB12345.</div></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal-fps-submit')">Cancel</button>
+      <button class="btn btn-primary" id="fps-submit-btn" onclick="submitFPS()">Submit FPS to HMRC</button>
+    </div>
+  </div>
+</div>
+
+<!-- New location modal -->
+<div class="modal-overlay" id="modal-new-location" style="display:none" onclick="closeModal('modal-new-location',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Add location</div>
+    <div class="form-row fr-2"><div class="form-group"><label>Location name</label><input placeholder="e.g. Manchester Office"></div><div class="form-group"><label>Location code</label><input class="mono" placeholder="LOC-003"></div></div>
+    <div class="form-group" style="margin-bottom:12px"><label>Address</label><input placeholder="Street address, town, postcode"></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-new-location')">Cancel</button><button class="btn btn-primary">Add location</button></div>
+  </div>
+</div>
+
+<!-- New PAYE scheme modal -->
+<div class="modal-overlay" id="modal-new-paye-scheme" style="display:none" onclick="closeModal('modal-new-paye-scheme',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Add PAYE scheme</div>
+    <div class="form-row fr-2"><div class="form-group"><label>Scheme name</label><input placeholder="e.g. Subsidiary Ltd"></div><div class="form-group"><label>PAYE employer reference</label><input class="mono" placeholder="e.g. 340/CD99002"></div></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('modal-new-paye-scheme')">Cancel</button><button class="btn btn-primary">Start PAYE scheme setup</button></div>
+  </div>
+</div>
+
+<script src="../shared/data.js"></script>
+<script src="../shared/calc.js"></script>
+<script src="../shared/ui.js"></script>
+<script>
+
+// ═══════════════════════════════════════════
+// ORG PAGE
+// ═══════════════════════════════════════════
+window._pageContext = 'org';
+
+function goToBureau() {
+  window.location.href = '../bureau/index.html';
+}
+
+// exitOrg on org page means go back to bureau
+function exitOrg() { goToBureau(); }
+
+// openOrg on org page: switch to a different org (stays on org page)
+function openOrg(orgName, screen) {
+  const db = Store.load();
+  const org = db.organisations.find(o => o.name === orgName);
+  if (org) {
+    Store.update(function(d) { d.meta.currentOrgId = org.id; });
+    const orgEmployees = db.employees.filter(e => e.orgId === org.id);
+    if (orgEmployees.length > 0) {
+      window.EMPLOYEES = orgEmployees;
+    }
+    currentOrgName = orgName;
+    const el = document.getElementById('org-dash-title'); if(el) el.textContent = orgName + ' \u2014 Dashboard';
+    const sub = document.getElementById('org-dash-sub'); if(sub) sub.textContent = (org.ref || '') + ' \u00b7 ' + (org.frequency || '') + ' \u00b7 RTI live';
+    const pr = document.getElementById('pr-sub'); if(pr) pr.textContent = orgName + ' \u00b7 All frequencies';
+    const ml = document.getElementById('sidebar-mode-label'); if(ml) ml.textContent = orgName;
+    const sm = {'screen-org-dashboard':'org-dashboard','screen-payroll-runs':'payroll-runs','screen-hours':'hours','screen-onboarding':'onboarding'};
+    nav(sm[screen] || 'org-dashboard', null, 'org');
+  }
+}
+
+function _orgBoot() {
+  // Read org from URL ?org=ORG001
+  const params = new URLSearchParams(window.location.search);
+  const db = Store.load();
+  const orgId = params.get('org') || db.meta.currentOrgId || 'ORG001';
+  const org = db.organisations.find(o => o.id === orgId) || db.organisations[0];
+  const orgEmployees = db.employees.filter(e => e.orgId === (org ? org.id : orgId));
+
+  // Wire up data from store
+  if (orgEmployees.length > 0) {
+    window.EMPLOYEES = orgEmployees;
+    window.RUN_HOURS = db.runHours || {};
+    window.HISTORY = db.history || [];
+  }
+
+  // Set org context in the UI
+  if (org) {
+    currentOrgName = org.name;
+    currentNavContext = 'org';
+    const el = document.getElementById('org-dash-title'); if(el) el.textContent = org.name + ' \u2014 Dashboard';
+    const sub = document.getElementById('org-dash-sub'); if(sub) sub.textContent = (org.ref || '') + ' \u00b7 ' + (org.frequency || '') + ' \u00b7 RTI live';
+    const ml = document.getElementById('sidebar-mode-label'); if(ml) ml.textContent = org.name;
+    const pr = document.getElementById('pr-sub'); if(pr) pr.textContent = org.name + ' \u00b7 All frequencies';
+    document.title = 'S4Labour Payroll \u2014 ' + org.name;
+  }
+
+  // Activate org nav
+  const firstNav = document.querySelector('#nav-org .nav-item');
+  if (firstNav) firstNav.classList.add('active');
+
+  // Role switcher: default to Org Admin on org page
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+  const orgBtn = Array.from(document.querySelectorAll('.role-btn')).find(b => b.textContent.trim() === 'Org Admin');
+  if (orgBtn) orgBtn.classList.add('active');
+
+  // Update avatar to org admin
+  const ra = document.getElementById('rail-avatar'); if(ra) ra.textContent = 'DW';
+  const ua = document.getElementById('user-avatar-sb'); if(ua) ua.textContent = 'DW';
+  const un = document.getElementById('user-name-sb'); if(un) un.textContent = 'Donna Wright';
+  const ur = document.getElementById('user-role-sb'); if(ur) ur.textContent = 'Org Admin';
+
+  initAll();
+
+  // Breadcrumb: show org name as context
+  const crumb = document.getElementById('crumb-current');
+  if (crumb && org) {
+    crumb.innerHTML = '<span class="crumb active">' + org.name + ' \u2014 Dashboard</span>';
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _orgBoot);
+} else {
+  _orgBoot();
+}
+
+</script>
+</body>
+</html>
