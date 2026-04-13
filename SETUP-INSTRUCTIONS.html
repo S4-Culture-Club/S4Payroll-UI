@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>S4Labour Payroll — Setup Instructions</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 860px; margin: 40px auto; padding: 0 24px; color: #1a1a1a; line-height: 1.6; }
+h1 { font-size: 24px; margin-bottom: 4px; }
+h2 { font-size: 17px; margin-top: 36px; margin-bottom: 8px; border-bottom: 2px solid #1a3a2a; padding-bottom: 6px; color: #1a3a2a; }
+h3 { font-size: 14px; margin-bottom: 4px; }
+.step { background: #f8f8f4; border: 1px solid #ddd; border-left: 4px solid #1a3a2a; border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
+.step-num { background: #1a3a2a; color: #fff; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-right: 8px; }
+code { background: #f0efe8; border: 1px solid #ddd; border-radius: 4px; padding: 1px 6px; font-family: 'DM Mono', 'Courier New', monospace; font-size: 13px; }
+pre { background: #1a1a1a; color: #e8e8e8; border-radius: 8px; padding: 16px 20px; overflow-x: auto; font-size: 13px; line-height: 1.8; }
+.file-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.file-table th { text-align: left; padding: 8px 12px; background: #f0efe8; border-bottom: 2px solid #ddd; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #555; }
+.file-table td { padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+.file-table td:first-child { font-family: monospace; font-size: 12px; white-space: nowrap; }
+.file-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
+.badge-green { background: #eaf5ee; color: #1d6b40; }
+.badge-blue { background: #ecfbfd; color: #0b5f75; }
+.badge-gold { background: #fdf8e7; color: #7a5a00; }
+.alert { background: #fdf8e7; border: 1px solid #e8d080; border-radius: 6px; padding: 12px 16px; margin: 16px 0; font-size: 13px; }
+.arrow { color: #999; margin: 0 6px; }
+</style>
+</head>
+<body>
+
+<h1>S4Labour Payroll — GitHub Pages Setup</h1>
+<p style="color:#666; margin-top:4px">Decoupled bureau &amp; org prototype · localStorage persistence</p>
+
+<h2>What you downloaded</h2>
+<table class="file-table">
+  <thead><tr><th>Downloaded filename</th><th>Where it goes in your repo</th><th>What it is</th></tr></thead>
+  <tbody>
+    <tr><td>PORTAL-index.html</td><td><code>index.html</code></td><td>Landing page — two-button portal</td></tr>
+    <tr><td>BUREAU-index.html</td><td><code>bureau/index.html</code></td><td>Bureau dashboard (standalone)</td></tr>
+    <tr><td>ORG-index.html</td><td><code>org/index.html</code></td><td>Org dashboard (standalone)</td></tr>
+    <tr><td>shared-data.js</td><td><code>shared/data.js</code></td><td>localStorage persistence + seed data</td></tr>
+    <tr><td>shared-calc.js</td><td><code>shared/calc.js</code></td><td>UK payroll calculation engine 2025/26</td></tr>
+    <tr><td>shared-styles.css</td><td><code>shared/styles.css</code></td><td>Shared stylesheet</td></tr>
+    <tr><td>shared-ui.js</td><td><code>shared/ui.js</code></td><td>Shared UI + navigation functions</td></tr>
+    <tr><td>github-deploy.yml</td><td><code>.github/workflows/deploy.yml</code></td><td>Auto-deploy action</td></tr>
+  </tbody>
+</table>
+
+<h2>Final folder structure in your repo</h2>
+<pre>s4labour-payroll/
+├── index.html                        ← rename from PORTAL-index.html
+├── bureau/
+│   └── index.html                    ← rename from BUREAU-index.html
+├── org/
+│   └── index.html                    ← rename from ORG-index.html
+├── shared/
+│   ├── data.js                       ← rename from shared-data.js
+│   ├── calc.js                       ← rename from shared-calc.js
+│   ├── styles.css                    ← rename from shared-styles.css
+│   └── ui.js                         ← rename from shared-ui.js
+└── .github/
+    └── workflows/
+        └── deploy.yml                ← rename from github-deploy.yml</pre>
+
+<div class="alert">
+  ⚠️ <strong>The folder names matter.</strong> The HTML files reference <code>../shared/styles.css</code> and <code>../bureau/index.html</code> — so the directory structure above must be exact.
+</div>
+
+<h2>Step-by-step setup</h2>
+
+<div class="step">
+  <span class="step-num">1</span> <strong>Create a new GitHub repo</strong><br>
+  Go to <a href="https://github.com/new">github.com/new</a><br>
+  Name it <code>s4labour-payroll</code> (or anything you like)<br>
+  Set it to <strong>Public</strong><br>
+  Do <strong>not</strong> initialise with README (you're bringing your own files)
+</div>
+
+<div class="step">
+  <span class="step-num">2</span> <strong>Build the folder structure on your computer</strong><br><br>
+  Create these folders:<br>
+  <code>s4labour-payroll/</code><br>
+  <code>s4labour-payroll/bureau/</code><br>
+  <code>s4labour-payroll/org/</code><br>
+  <code>s4labour-payroll/shared/</code><br>
+  <code>s4labour-payroll/.github/workflows/</code><br><br>
+  Then rename and move each downloaded file into place (see table above).<br>
+  Also create an empty file called <code>.nojekyll</code> in the root — no content needed, just the file existing tells GitHub to serve the assets correctly.
+</div>
+
+<div class="step">
+  <span class="step-num">3</span> <strong>Push to GitHub</strong><br><br>
+  Open a terminal, navigate into your <code>s4labour-payroll/</code> folder, then run:
+  <pre>git init
+git add .
+git commit -m "Initial commit — bureau/org prototype"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/s4labour-payroll.git
+git push -u origin main</pre>
+  Replace <code>YOUR_USERNAME</code> with your GitHub username.
+</div>
+
+<div class="step">
+  <span class="step-num">4</span> <strong>Enable GitHub Pages</strong><br><br>
+  On your repo on GitHub:<br>
+  <strong>Settings</strong> → <strong>Pages</strong> (left sidebar) → under <em>Source</em> select <strong>GitHub Actions</strong> → Save<br><br>
+  The <code>deploy.yml</code> workflow will automatically run on every push to <code>main</code>.
+</div>
+
+<div class="step">
+  <span class="step-num">5</span> <strong>You're live</strong><br><br>
+  After ~1 minute your site is at:<br>
+  <code>https://YOUR_USERNAME.github.io/s4labour-payroll/</code><br><br>
+  Check progress under the <strong>Actions</strong> tab in your GitHub repo.
+</div>
+
+<h2>How data persistence works</h2>
+<p>All data lives in the browser's <strong>localStorage</strong> under the key <code>s4payroll_v1</code>.</p>
+<ul>
+  <li>Survives page refreshes and closing/reopening the browser</li>
+  <li>Both bureau and org views read and write the <em>same</em> key — changes in one appear in the other</li>
+  <li>When you click an org in the bureau view, it saves the org ID to localStorage then navigates to <code>org/index.html?org=ORG001</code></li>
+  <li>The landing page has a <strong>↺ Reset data</strong> button to wipe back to defaults — useful before demos</li>
+  <li>Data is per-browser only — different browsers/devices don't share it (this is the tradeoff vs a real DB)</li>
+</ul>
+
+<h2>Iterating each view independently</h2>
+<table class="file-table">
+  <thead><tr><th>What you want to change</th><th>File to edit</th></tr></thead>
+  <tbody>
+    <tr><td>Bureau dashboard, org list, pay runs overview, user management</td><td><code>bureau/index.html</code></td></tr>
+    <tr><td>Payroll run pipeline, hours entry, employee screens, reports</td><td><code>org/index.html</code></td></tr>
+    <tr><td>Tax rates, NI thresholds, pension bands (tax year update)</td><td><code>shared/calc.js</code> → <code>TAX</code> object</td></tr>
+    <tr><td>Seed organisations, employees, run history</td><td><code>shared/data.js</code> → <code>SEED</code> object</td></tr>
+    <tr><td>Colours, fonts, component styles</td><td><code>shared/styles.css</code></td></tr>
+    <tr><td>Navigation, modals, role switcher</td><td><code>shared/ui.js</code></td></tr>
+  </tbody>
+</table>
+
+<h2>Future: upgrading to a real database</h2>
+<p>The <code>Store</code> API in <code>shared/data.js</code> is designed to be swapped out without touching bureau or org HTML. When ready:</p>
+<ol>
+  <li>Replace <code>Store.load()</code> with a call to your Supabase/Firebase API</li>
+  <li>Replace <code>Store.save()</code> with a write call</li>
+  <li>Keep the same function names — nothing else changes</li>
+</ol>
+
+</body>
+</html>

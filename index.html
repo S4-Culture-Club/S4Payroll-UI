@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S4Labour Payroll</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0efe8;
+  --surface: #fafaf7;
+  --surface2: #eeeee6;
+  --border: #ddddd3;
+  --border2: #c8c8bc;
+  --text: #18180f;
+  --text2: #5c5c50;
+  --text3: #9a9a8c;
+  --accent: #1a3a2a;
+  --accent2: #2d6144;
+  --accent-light: #e8f2ec;
+  --gold: #b8860b;
+  --gold-bg: #fdf8e7;
+  --success: #1d6b40;
+  --success-bg: #eaf5ee;
+  --teal: #0e7490;
+  --teal-bg: #ecfbfd;
+  --radius: 6px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.13);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--accent);height:56px;display:flex;align-items:center;padding:0 32px;gap:12px;flex-shrink:0}
+.logo-mark{display:flex;align-items:center;gap:10px}
+.logo-icon{width:30px;height:30px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#18180f}
+.logo-text{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff}
+.logo-sub{font-size:10px;color:rgba(255,255,255,0.45);margin-top:1px}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.storage-badge{font-size:11px;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:4px 10px;border-radius:99px;display:flex;align-items:center;gap:6px}
+.storage-dot{width:6px;height:6px;border-radius:50%;background:#4ade80}
+.reset-btn{font-size:11px;color:rgba(255,255,255,0.4);background:none;border:1px solid rgba(255,255,255,0.1);padding:4px 10px;border-radius:99px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.12s}
+.reset-btn:hover{color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.25)}
+
+/* ── HERO ── */
+.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px}
+.hero-label{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px}
+.hero-title{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--text);letter-spacing:-0.8px;margin-bottom:8px;text-align:center}
+.hero-sub{font-size:15px;color:var(--text2);text-align:center;max-width:440px;margin-bottom:48px;line-height:1.6}
+
+/* ── PORTAL CARDS ── */
+.portal-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:720px;width:100%;margin-bottom:40px}
+.portal-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:32px 28px;cursor:pointer;transition:all 0.18s;position:relative;overflow:hidden;text-decoration:none;display:block}
+.portal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.portal-card.bureau::before{background:var(--accent)}
+.portal-card.org::before{background:var(--teal)}
+.portal-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--border2)}
+.portal-card:active{transform:translateY(-1px)}
+
+.portal-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.portal-card.bureau .portal-icon{background:var(--accent-light);border:1px solid #9ecca8}
+.portal-card.org .portal-icon{background:var(--teal-bg);border:1px solid #8dd9e8}
+.portal-icon svg{width:22px;height:22px}
+.portal-card.bureau .portal-icon svg{stroke:var(--accent)}
+.portal-card.org .portal-icon svg{stroke:var(--teal)}
+
+.portal-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px}
+.portal-desc{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:20px}
+.portal-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.portal-tag{font-size:11px;color:var(--text2);background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:4px}
+.portal-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#fff;padding:9px 18px;border-radius:var(--radius);transition:all 0.12s}
+.portal-card.bureau .portal-cta{background:var(--accent)}
+.portal-card.bureau .portal-cta:hover{background:var(--accent2)}
+.portal-card.org .portal-cta{background:var(--teal)}
+.portal-card.org .portal-cta:hover{background:#0b5f75}
+
+/* ── STATUS STRIP ── */
+.status-strip{display:flex;align-items:center;gap:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 24px;max-width:720px;width:100%}
+.status-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.status-item strong{color:var(--text);font-weight:600}
+.status-sep{width:1px;height:16px;background:var(--border2)}
+.status-dot{width:8px;height:8px;border-radius:50%}
+.dot-green{background:var(--success)}
+.dot-amber{background:#c47a00}
+
+/* ── FOOTER ── */
+.footer{padding:20px;text-align:center;font-size:11px;color:var(--text3)}
+.footer a{color:var(--text3);text-decoration:underline;cursor:pointer}
+
+@media(max-width:600px){
+  .portal-grid{grid-template-columns:1fr}
+  .hero-title{font-size:26px}
+  .status-strip{flex-direction:column;align-items:flex-start;gap:10px}
+  .status-sep{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo-mark">
+    <div class="logo-icon">S4</div>
+    <div>
+      <div class="logo-text">Payroll</div>
+      <div class="logo-sub">Midlands Bureau</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="storage-badge">
+      <div class="storage-dot" id="storage-dot"></div>
+      <span id="storage-label">Loading…</span>
+    </div>
+    <button class="reset-btn" onclick="resetData()">↺ Reset data</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-label">S4Labour Payroll Platform</div>
+  <h1 class="hero-title">Where would you like to go?</h1>
+  <p class="hero-sub">Choose your view. All data is shared — changes in one view are reflected in the other.</p>
+
+  <div class="portal-grid">
+
+    <a class="portal-card bureau" href="bureau/index.html">
+      <div class="portal-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-width="2"/></svg>
+      </div>
+      <div class="portal-title">Bureau Dashboard</div>
+      <p class="portal-desc">Manage all client organisations, monitor payroll runs across the bureau, and administer users and global pay elements.</p>
+      <div class="portal-tags">
+        <span class="portal-tag">All organisations</span>
+        <span class="portal-tag">Pay run pipeline</span>
+        <span class="portal-tag">User management</span>
+        <span class="portal-tag">Global elements</span>
+      </div>
+      <div class="portal-cta">
+        Enter Bureau View
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    <a class="portal-card org" href="org/index.html">
+      <div class="portal-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke-width="2"/></svg>
+      </div>
+      <div class="portal-title">Organisation Dashboard</div>
+      <p class="portal-desc">Run payroll, manage employees, enter hours, view reports and BACS outputs for a single organisation.</p>
+      <div class="portal-tags">
+        <span class="portal-tag">Payroll runs</span>
+        <span class="portal-tag">Hours &amp; amendments</span>
+        <span class="portal-tag">Employees</span>
+        <span class="portal-tag">Reports &amp; BACS</span>
+      </div>
+      <div class="portal-cta">
+        Enter Org View
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="status-strip" id="status-strip">
+    <div class="status-item">
+      <div class="status-dot dot-green"></div>
+      <span><strong id="org-count">5</strong> organisations</span>
+    </div>
+    <div class="status-sep"></div>
+    <div class="status-item">
+      <div class="status-dot dot-green"></div>
+      <span><strong id="emp-count">5</strong> employees on record</span>
+    </div>
+    <div class="status-sep"></div>
+    <div class="status-item">
+      <div class="status-dot dot-amber"></div>
+      <span>Last saved: <strong id="last-saved">—</strong></span>
+    </div>
+    <div class="status-sep"></div>
+    <div class="status-item">
+      <span>Data stored in <strong>this browser</strong></span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  S4Labour Payroll Prototype · Data is stored locally in your browser via localStorage · 
+  <a onclick="resetData()">Reset all data to defaults</a>
+</div>
+
+<script src="shared/data.js"></script>
+<script>
+function updateStatus() {
+  try {
+    const db = Store.load();
+    document.getElementById('org-count').textContent = db.organisations.length;
+    document.getElementById('emp-count').textContent = db.employees.length;
+    const saved = db.meta.lastSaved
+      ? new Date(db.meta.lastSaved).toLocaleString('en-GB', { dateStyle:'short', timeStyle:'short' })
+      : 'never';
+    document.getElementById('last-saved').textContent = saved;
+    document.getElementById('storage-label').textContent = 'Data saved locally';
+    document.getElementById('storage-dot').style.background = '#4ade80';
+  } catch(e) {
+    document.getElementById('storage-label').textContent = 'Storage unavailable';
+    document.getElementById('storage-dot').style.background = '#f87171';
+  }
+}
+
+function resetData() {
+  if (confirm('Reset all data back to defaults? This cannot be undone.')) {
+    Store.reset();
+    updateStatus();
+    alert('Data reset to defaults.');
+  }
+}
+
+updateStatus();
+</script>
+</body>
+</html>
