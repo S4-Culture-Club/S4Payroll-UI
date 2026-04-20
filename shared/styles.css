@@ -378,3 +378,79 @@ tr:hover td{background:var(--surface2)}
 /* ── SCROLLABLE CONTENT PANELS ── */
 .emp-tab-panel{display:none}
 .emp-tab-panel.visible{display:block}
+
+/* ── MISSING UTILITIES (used in HTML, added here) ── */
+.flex{display:flex}
+.flex-center{display:flex;align-items:center}
+.flex-col{display:flex;flex-direction:column}
+.run-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px}
+.run-period{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
+
+/* ── UX IMPROVEMENTS ── */
+
+/* Smoother screen transitions */
+.screen{display:none;animation:fadeIn 0.18s ease}
+.screen.visible{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+
+/* Better focus states */
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+
+/* Clickable table rows feedback */
+tr[onclick]{cursor:pointer}
+tr[onclick]:hover td{background:var(--accent-light)!important;transition:background 0.1s}
+
+/* Better modal backdrop blur */
+.modal-overlay{backdrop-filter:blur(3px)}
+
+/* Improved scrollbar */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:var(--text3)}
+
+/* Card hover lift */
+.card{transition:box-shadow 0.15s}
+
+/* Disabled state */
+button:disabled,.btn:disabled{opacity:0.45;cursor:not-allowed;pointer-events:none}
+
+/* Better empty states */
+.empty-state{text-align:center;padding:48px 24px;color:var(--text3)}
+.empty-state-icon{font-size:32px;margin-bottom:12px}
+.empty-state-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text2);margin-bottom:6px}
+.empty-state-sub{font-size:13px;color:var(--text3)}
+
+/* Selection highlight in tables */
+tr.selected td{background:var(--accent-light)!important}
+
+/* Run card improved */
+.run-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--border2);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px;cursor:pointer;transition:box-shadow 0.15s,border-color 0.15s}
+.run-card:hover{box-shadow:var(--shadow-md)}
+
+/* Topbar portal link */
+.portal-back-link{display:flex;align-items:center;gap:5px;text-decoration:none;color:var(--text3);font-size:12px;font-weight:500;padding:4px 8px;border-radius:var(--radius);border:1px solid var(--border);margin-right:10px;transition:all 0.12s}
+.portal-back-link:hover{background:var(--surface2);color:var(--text)}
+
+/* Badge improvements — add dot prefix for status badges */
+.badge-live::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:4px;opacity:0.7}
+
+/* Notification badge on buttons */
+.notif-count{background:var(--danger);color:#fff;font-size:10px;padding:1px 5px;border-radius:99px;font-weight:700;margin-left:2px}
+
+/* Improved form section */
+.form-section{margin-bottom:22px;padding-bottom:4px}
+.form-section-title{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--text2);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);letter-spacing:0.06em;text-transform:uppercase}
+
+/* Alert icon alignment */
+.alert-icon{font-size:15px;flex-shrink:0;margin-top:1px;line-height:1}
+
+/* Pill tab active transition */
+.pill-tab{transition:all 0.1s}
+
+/* Smooth sidebar open */
+.sidebar{transition:transform 0.2s cubic-bezier(0.4,0,0.2,1)}
+
+/* Print-friendly (basic) */
+@media print{.icon-rail,.sidebar,.topbar{display:none!important}.content{overflow:visible!important}.screen{display:block!important}}
